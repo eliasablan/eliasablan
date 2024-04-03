@@ -1,15 +1,17 @@
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import { Toaster } from '@/components/ui/sonner'
 import type { Metadata } from 'next'
 
 import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
 
 import { cn } from '@/lib/utils'
-import { ThemeProvider } from '@/components/ThemeProvider'
-
 import './globals.css'
-import { Toaster } from '@/components/ui/sonner'
+
+import { ThemeProvider } from '@/components/ThemeProvider'
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
   title: {
@@ -44,7 +46,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <Header />
           {children}
+          <Footer />
           <Toaster richColors expand closeButton />
         </ThemeProvider>
         <Analytics />
