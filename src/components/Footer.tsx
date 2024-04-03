@@ -7,7 +7,7 @@ const Footer = () => {
     <motion.div
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      className="mx-auto hidden w-full max-w-2xl justify-center border-t-[1px] py-6 md:flex"
+      className="mx-auto hidden w-full max-w-2xl justify-center border-t-[1px] py-3 md:flex"
     >
       <ModeToggle align="center" className="rounded-full border-0" />
     </motion.div>
