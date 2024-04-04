@@ -33,11 +33,11 @@ export default function RootLayout({
       <body
         className={cn(
           // font
-          'text-primary font-sans antialiased',
+          'font-sans text-primary antialiased',
           GeistSans.variable,
           GeistMono.variable,
           // scrollbar
-          'scrollbar'
+          'scrollbar scrollbar-thumb-accent'
         )}
       >
         <ThemeProvider
