@@ -1,6 +1,6 @@
 import { defineField, defineType } from 'sanity'
-import { MediaEditor } from '@catherineriver/sanity-plugin-generate-ogimage'
-import OGImageEditor from '@/components/sanity/OGImageEditor'
+// import { MediaEditor } from '@catherineriver/sanity-plugin-generate-ogimage'
+// import OGImageEditor from '@/components/sanity/OGImageEditor'
 
 export default defineType({
   name: 'post',
