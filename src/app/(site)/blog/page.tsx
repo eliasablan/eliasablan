@@ -1,7 +1,16 @@
-export default function Blog() {
+import React from 'react'
+import Blog from '@/components/Blog'
+
+export const metadata = {
+  title: 'Blog',
+  description:
+    "I'm a software developer with 5+ years of experience. I share my knowledge and insights on web development, technology, and design on his blog.",
+}
+
+export default function page() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      Blog
+    <main className="mx-auto w-full max-w-2xl px-5 pb-12 md:pb-0 md:pt-7">
+      <Blog />
     </main>
   )
 }
