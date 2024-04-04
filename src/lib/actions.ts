@@ -6,7 +6,14 @@ import ContactFormEmail from './emails/contact-form-email'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
-export async function sendEmail(data) {
+interface EmailData {
+  name: string
+  email: string
+  message: string
+}
+
+export async function sendEmail(data: EmailData) {
+  console.log(data)
   const result = FormSchema.safeParse(data)
 
   if (result.success) {
