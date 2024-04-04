@@ -20,7 +20,7 @@ const Tags = async () => {
                   href={`/tags/${tag.slug}`}
                   className={cn(
                     badgeVariants({ variant: 'secondary' }),
-                    'hover:border-primary hover:border-2 hover:border-dashed'
+                    'border-2 hover:border-2 hover:border-dashed hover:border-primary'
                   )}
                 >
                   #{tag.name}
