@@ -39,32 +39,32 @@ export async function getTags(): Promise<Tag[]> {
   })
 }
 
-// export const getPostData = async (slug) => {
-//   const query = `*[_type=='post' && slug.current == "${slug}"][0] {
-//     _id,
-//     title,
-//     description,
-//     content,
-//     og_image,
-//     _createdAt
-//   }`
+export async function getPostData(slug: string): Promise<Post> {
+  const query = `*[_type=='post' && slug.current == "${slug}"][0] {
+    _id,
+    title,
+    description,
+    content,
+    og_image,
+    _createdAt
+  }`
 
-//   const post = await sanityFetch({ query, tags: ['post'] })
+  const post = await sanityFetch({ query, tags: ['post'] })
 
-//   return post
-// }
+  return post
+}
 
-// export const getProjectData = async (slug) => {
-//   const query = `*[_type=='project' && slug.current == "${slug}"][0] {
-//     name,
-//     short_description,
-//     description,
-//     logo,
-//     tech_tools,
-//     urls,
-//   }`
+export async function getProjectData(slug: string): Promise<Project> {
+  const query = `*[_type=='project' && slug.current == "${slug}"][0] {
+    name,
+    short_description,
+    description,
+    logo,
+    tech_tools,
+    urls,
+  }`
 
-//   const project = await sanityFetch({ query, tags: ['project'] })
+  const project = await sanityFetch({ query, tags: ['project'] })
 
-//   return project
-// }
+  return project
+}

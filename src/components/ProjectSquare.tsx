@@ -27,7 +27,7 @@ const ProjectSquare = ({ project }: ProjectSquareProps) => {
         <Link href={`/projects/${project.slug?.current}`}>
           <Card
             className={cn(
-              'bg-radius hover:bg-accent flex min-w-[120px] flex-col rounded-lg border px-4 py-2'
+              'bg-radius flex min-w-[120px] flex-col rounded-lg border px-4 py-2 hover:bg-accent'
             )}
           >
             <div className="py-3">
