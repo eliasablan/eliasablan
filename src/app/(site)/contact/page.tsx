@@ -7,7 +7,7 @@ export const metadata = {
     'Leave an email and message in my inbox to get in touch with me.',
 }
 
-export default function ContactPage() {
+export default function page() {
   return (
     <main className="mx-auto w-full max-w-2xl px-5 pb-12 md:pb-0 md:pt-7">
       <Contact />
