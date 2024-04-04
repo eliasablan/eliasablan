@@ -13,3 +13,8 @@ export const getProjectsQuery = `*[_type=='project'] | order(_updatedAt desc)[0.
     logo,
     tech_tools
   }`
+
+export const getTagsQuery = `*[_type=='tag'] | order(_updatedAt desc)[0..9] {
+    "slug":slug.current,
+    name,
+  }`

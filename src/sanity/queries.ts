@@ -1,6 +1,10 @@
 import { client } from './utils'
-import { getPostsQuery, getProjectsQuery } from './groqQueries'
-import { Post, Project } from '../../sanity.types'
+import {
+  getPostsQuery,
+  getProjectsQuery,
+  getTagsQuery,
+} from './groqQueries'
+import { Post, Project, Tag } from '../../sanity.types'
 
 async function sanityFetch({
   query,
@@ -25,6 +29,13 @@ export async function getPosts(): Promise<Post[]> {
   return sanityFetch({
     query: getPostsQuery,
     tags: ['post'],
+  })
+}
+
+export async function getTags(): Promise<Tag[]> {
+  return sanityFetch({
+    query: getTagsQuery,
+    tags: ['tag'],
   })
 }
 
