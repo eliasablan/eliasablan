@@ -1,6 +1,8 @@
 import { defineField, defineType } from 'sanity'
-// import { MediaEditor } from '@catherineriver/sanity-plugin-generate-ogimage'
-// import OGImageEditor from '@/components/sanity/OGImageEditor'
+import {
+  OGMediaEditor,
+  OGMediaIcon,
+} from '@/components/sanity/OGMediaEditor'
 
 export default defineType({
   name: 'post',
@@ -54,26 +56,20 @@ export default defineType({
         },
       ],
     }),
-    // defineField({
-    //   name: 'og_image',
-    //   title: 'OG image',
-    //   type: 'image',
-    //   options: {
-    //     sources: [
-    //       {
-    //         name: 'sharing-image',
-    //         title: 'Generate Image',
-    //         icon: () => <div>🎨</div>,
-    //         component: (props) => (
-    //           <MediaEditor
-    //             {...props}
-    //             darkMode={false}
-    //             layouts={[OGImageEditor]}
-    //           />
-    //         ),
-    //       },
-    //     ],
-    //   },
-    // }),
+    defineField({
+      name: 'og_image',
+      title: 'OG image',
+      type: 'image',
+      options: {
+        sources: [
+          {
+            name: 'sharing-image',
+            title: 'Generate Image',
+            icon: OGMediaIcon,
+            component: OGMediaEditor,
+          },
+        ],
+      },
+    }),
   ],
 })
