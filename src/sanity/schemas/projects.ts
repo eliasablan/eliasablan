@@ -1,5 +1,9 @@
 import { defineField, defineType } from 'sanity'
 import { preview } from 'sanity-plugin-icon-picker'
+import {
+  OGMediaEditor,
+  OGMediaIcon,
+} from '@/components/sanity/OGMediaEditor'
 
 export default defineType({
   name: 'project',
@@ -152,6 +156,21 @@ export default defineType({
       type: 'array',
       title: 'Technologies',
       of: [{ type: 'string' }],
+    }),
+    defineField({
+      name: 'og_image',
+      title: 'OG image',
+      type: 'image',
+      options: {
+        sources: [
+          {
+            name: 'sharing-image',
+            title: 'Generate Image',
+            icon: OGMediaIcon,
+            component: OGMediaEditor,
+          },
+        ],
+      },
     }),
   ],
 })
