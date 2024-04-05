@@ -6,10 +6,7 @@ interface PostsProps {
 }
 
 const Blog = async ({ tag = null }: PostsProps) => {
-  // const posts = await getPosts()
-
   let posts = null
-  console.log({ tag })
   if (tag) {
     posts = await getPostsByTag(tag)
   } else {

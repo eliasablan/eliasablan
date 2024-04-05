@@ -13,7 +13,6 @@ const Projects = async ({ tag = null }: ProjectsProps) => {
   } else {
     projects = await getProjects()
   }
-  console.log({ projects })
 
   return (
     <div className="py-8 md:pt-12">

@@ -47,7 +47,6 @@ async function sanityFetch<QueryResponse>({
 
 // Projects Queries
 export async function getProjects(): Promise<GetProjectsQueryResult> {
-  console.log('getProjects')
   return sanityFetch({
     query: getProjectsQuery,
     tags: ['project'],
