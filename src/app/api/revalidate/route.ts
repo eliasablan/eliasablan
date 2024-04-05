@@ -1,4 +1,5 @@
-import { revalidatePath, revalidateTag } from 'next/cache'
+// import { revalidatePath, revalidateTag } from 'next/cache'
+import { revalidateTag } from 'next/cache'
 import { type NextRequest, NextResponse } from 'next/server'
 import { parseBody } from 'next-sanity/webhook'
 
@@ -18,14 +19,15 @@ export async function POST(req: NextRequest) {
     }
 
     revalidateTag(body._type)
-    revalidatePath('/')
-    if (body._type === 'project') {
-      revalidatePath('/projects')
-      revalidatePath(`/projects/${body.slug}`)
-    } else if (body._type === 'post') {
-      revalidatePath('/blog')
-      revalidatePath(`/blog/${body.slug}`)
-    }
+    revalidateTag(`${body._type}:${body.slug}`)
+    // revalidatePath('/')
+    // if (body._type === 'project') {
+    //   revalidatePath('/projects')
+    //   revalidatePath(`/projects/${body.slug}`)
+    // } else if (body._type === 'post') {
+    //   revalidatePath('/blog')
+    //   revalidatePath(`/blog/${body.slug}`)
+    // }
 
     return NextResponse.json({
       status: 200,
