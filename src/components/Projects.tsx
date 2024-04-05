@@ -1,9 +1,19 @@
 import { Project } from '../../sanity.types'
 import ProjectSquare from './ProjectSquare'
-import { getProjects } from '@/sanity/queries'
+import { getProjects, getProjectsByTag } from '@/sanity/queries'
 
-const Projects = async () => {
-  const projects = await getProjects()
+interface ProjectsProps {
+  tag?: string | null
+}
+
+const Projects = async ({ tag = null }: ProjectsProps) => {
+  let projects = null
+  if (tag) {
+    projects = await getProjectsByTag(tag)
+  } else {
+    projects = await getProjects()
+  }
+  console.log({ projects })
 
   return (
     <div className="py-8 md:pt-12">

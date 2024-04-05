@@ -297,8 +297,16 @@ export type GetPostsQueryResult = Array<{
   slug: string | null;
   _createdAt: string;
 }>;
+// Variable: getPostsByTagQuery
+// Query: *[_type=='post' && tags[]->slug.current == $slug] | order(_updatedAt desc)[0..9] {  _id,  title,  "slug":slug.current,  _createdAt}
+export type GetPostsByTagQueryResult = Array<{
+  _id: string;
+  title: string | null;
+  slug: string | null;
+  _createdAt: string;
+}>;
 // Variable: getPostDataQuery
-// Query: *[_type=='post' && slug.current == "$slug"][0] {    _id,    title,    description,    content,    og_image,    _createdAt,    tags[]->{      name,      slug    }  }
+// Query: *[_type=='post' && slug.current == $slug][0] {    _id,    title,    description,    content,    og_image,    _createdAt,    tags[]->{      name,      slug    }  }
 export type GetPostDataQueryResult = {
   _id: string;
   title: string | null;
@@ -390,8 +398,48 @@ export type GetProjectsQueryResult = Array<{
     [internalGroqTypeReferenceTo]?: "tag";
   }> | null;
 }>;
+// Variable: getProjectsByTagQuery
+// Query: *[_type=='project' && tags[]->slug.current == $slug] | order(_updatedAt desc)[0..9] {  slug,  status,  name,  short_description,  logo,  dark_logo,  tech_tools,  tags,}
+export type GetProjectsByTagQueryResult = Array<{
+  slug: Slug | null;
+  status: "completed" | "deployed" | "development" | null;
+  name: string | null;
+  short_description: string | null;
+  logo: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  } | null;
+  dark_logo: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  } | null;
+  tech_tools: Array<string> | null;
+  tags: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "tag";
+  }> | null;
+}>;
 // Variable: getProjectDataQuery
-// Query: *[_type=='project' && slug.current == "$slug"][0] {    _id,    name,    short_description,    description,    logo,    tech_tools,    urls,    tags[]->{      name,      slug    }  }
+// Query: *[_type=='project' && slug.current == $slug][0] {    _id,    name,    short_description,    description,    logo,    tech_tools,    urls,    tags[]->{      name,      slug    }  }
 export type GetProjectDataQueryResult = {
   _id: string;
   name: string | null;
@@ -457,7 +505,7 @@ export type GetTagsQueryResult = Array<{
   name: string | null;
 }>;
 // Variable: getTagDataQuery
-// Query: *[_type=='tag' && slug.current == "$slug"][0] {    name,    slug  }
+// Query: *[_type=='tag' && slug.current == $slug][0] {    name,    slug  }
 export type GetTagDataQueryResult = {
   name: string | null;
   slug: Slug | null;

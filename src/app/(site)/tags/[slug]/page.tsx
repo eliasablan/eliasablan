@@ -1,6 +1,8 @@
 import React from 'react'
+import Blog from '@/components/Blog'
 
 import { getTagData } from '@/sanity/queries'
+import Projects from '@/components/Projects'
 
 export const generateMetadata = async ({ params }: TagProps) => {
   const tag = await getTagData(params.slug)
@@ -22,15 +24,15 @@ interface TagProps {
 }
 
 const tag = async ({ params }: TagProps) => {
-  const tag = await getTagData(params.slug)
-
   return (
-    <main className="relative mx-auto w-full max-w-2xl">
-      <article className="px-6 pb-28 pt-8 md:mt-6 md:pt-16">
-        <div className="mx-auto mb-10 block max-w-sm text-center">
-          {tag?.name}
-        </div>
-      </article>
+    <main className="mx-auto w-full max-w-2xl px-5 pb-12 md:pb-0 md:pt-7">
+      <div className="py-8 md:pt-12">
+        <h2 className="text-xl font-medium underline decoration-dashed">
+          Tag: #{params.slug}
+        </h2>
+        <Projects tag={params.slug} />
+        <Blog tag={params.slug} />
+      </div>
     </main>
   )
 }

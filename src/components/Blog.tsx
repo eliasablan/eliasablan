@@ -1,8 +1,20 @@
 import PostItem from './PostItem'
-import { getPosts } from '@/sanity/queries'
+import { getPosts, getPostsByTag } from '@/sanity/queries'
 
-const Blog = async () => {
-  const posts = await getPosts()
+interface PostsProps {
+  tag?: string | null
+}
+
+const Blog = async ({ tag = null }: PostsProps) => {
+  // const posts = await getPosts()
+
+  let posts = null
+  console.log({ tag })
+  if (tag) {
+    posts = await getPostsByTag(tag)
+  } else {
+    posts = await getPosts()
+  }
 
   return (
     <div className="py-8 md:pt-12">

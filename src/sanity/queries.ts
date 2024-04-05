@@ -3,9 +3,11 @@ import { QueryParams } from 'next-sanity'
 import {
   // Projects
   getProjectsQuery,
+  getProjectsByTagQuery,
   getProjectDataQuery,
   // Posts
   getPostsQuery,
+  getPostsByTagQuery,
   getPostDataQuery,
   // Tags
   getTagsQuery,
@@ -14,9 +16,11 @@ import {
 import {
   // Projects
   GetProjectsQueryResult,
+  GetProjectsByTagQueryResult,
   GetProjectDataQueryResult,
   // Posts
   GetPostsQueryResult,
+  GetPostsByTagQueryResult,
   GetPostDataQueryResult,
   // Tags
   GetTagsQueryResult,
@@ -43,8 +47,19 @@ async function sanityFetch<QueryResponse>({
 
 // Projects Queries
 export async function getProjects(): Promise<GetProjectsQueryResult> {
+  console.log('getProjects')
   return sanityFetch({
     query: getProjectsQuery,
+    tags: ['project'],
+  })
+}
+
+export async function getProjectsByTag(
+  slug: string
+): Promise<GetProjectsByTagQueryResult> {
+  return sanityFetch({
+    query: getProjectsByTagQuery,
+    params: { slug },
     tags: ['project'],
   })
 }
@@ -63,6 +78,16 @@ export async function getProjectData(
 export async function getPosts(): Promise<GetPostsQueryResult> {
   return sanityFetch({
     query: getPostsQuery,
+    tags: ['post'],
+  })
+}
+
+export async function getPostsByTag(
+  slug: string
+): Promise<GetPostsByTagQueryResult> {
+  return sanityFetch({
+    query: getPostsByTagQuery,
+    params: { slug },
     tags: ['post'],
   })
 }
