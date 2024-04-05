@@ -33,6 +33,8 @@ async function sanityFetch<QueryResponse>({
   tags?: string[]
 }) {
   return client.fetch<QueryResponse>(query, params, {
+    cache:
+      process.env.NODE_ENV === 'production' ? 'force-cache' : 'no-store',
     next: {
       tags,
     },
