@@ -13,7 +13,7 @@ import {
 import { ModeToggle } from '@/components/ThemeToggler'
 import { cn } from '@/lib/utils'
 
-const links = ['/projects', '/blog', '/contact']
+const links = ['/projects', '/blog', '/tags', '/contact']
 
 const Header = () => {
   const pathname = usePathname()
@@ -23,7 +23,7 @@ const Header = () => {
     <motion.div
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      className="from-background via-background fixed top-0 z-20 flex w-full items-center justify-center bg-gradient-to-b"
+      className="fixed top-0 z-20 flex w-full items-center justify-center bg-gradient-to-b from-background via-background"
     >
       {/* Desktop */}
       <div className="m-auto hidden w-full max-w-2xl md:flex">
@@ -33,7 +33,7 @@ const Header = () => {
             <Link
               href="/"
               className={cn(
-                'hover:bg-secondary flex w-full items-center rounded-lg px-[8px] py-[6px] capitalize transition-all duration-150 ease-in-out md:py-[3px]',
+                'flex w-full items-center rounded-lg px-[8px] py-[6px] capitalize transition-all duration-150 ease-in-out hover:bg-secondary md:py-[3px]',
                 pathname === '/' && 'bg-secondary'
               )}
             >
@@ -62,7 +62,7 @@ const Header = () => {
                 <Link
                   href={link}
                   className={cn(
-                    'hover:bg-secondary flex w-full items-center rounded-lg px-[8px] py-[6px] capitalize transition-all duration-150 ease-in-out md:py-[3px]',
+                    'flex w-full items-center rounded-lg px-[8px] py-[6px] capitalize transition-all duration-150 ease-in-out hover:bg-secondary md:py-[3px]',
                     pathname === link && 'bg-secondary'
                   )}
                 >
@@ -351,7 +351,7 @@ const Header = () => {
                 <Link
                   href="/"
                   className={cn(
-                    'hover:bg-secondary mt-2 flex w-full items-center rounded-lg px-4 py-2 capitalize transition-all duration-150 ease-in-out',
+                    'mt-2 flex w-full items-center rounded-lg px-4 py-2 capitalize transition-all duration-150 ease-in-out hover:bg-secondary',
                     pathname === '/' && 'bg-secondary'
                   )}
                 >
@@ -363,7 +363,7 @@ const Header = () => {
                   <Link
                     href={link}
                     className={cn(
-                      'hover:bg-secondary mt-2 flex w-full items-center rounded-lg px-4 py-2 capitalize transition-all duration-150 ease-in-out',
+                      'mt-2 flex w-full items-center rounded-lg px-4 py-2 capitalize transition-all duration-150 ease-in-out hover:bg-secondary',
                       pathname === link && 'bg-secondary'
                     )}
                   >
@@ -373,7 +373,7 @@ const Header = () => {
               ))}
             </div>
             {/* RRSS */}
-            <div className="bg-secondary text-secondary-foreground p-4">
+            <div className="bg-secondary p-4 text-secondary-foreground">
               <div className="mx-auto flex max-w-md justify-between px-4">
                 <ModeToggle align="start" className="rounded-full" />
                 <div className="flex items-center gap-4">

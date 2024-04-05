@@ -33,19 +33,39 @@ const ProjectSquare = ({ project }: ProjectSquareProps) => {
             <div className="py-3">
               {project.logo && (
                 <Image
-                  className="h-10 w-auto drop-shadow-xl"
+                  className={cn(
+                    'h-10 w-auto drop-shadow-xl',
+                    project.dark_logo && 'dark:hidden'
+                  )}
                   width={
-                    project.logo?.asset
+                    project.logo.asset
                       ? getImageDimensions(project.logo.asset).width
                       : undefined
                   }
                   height={
-                    project.logo?.asset
+                    project.logo.asset
                       ? getImageDimensions(project.logo.asset).height
                       : undefined
                   }
                   src={urlFor(project.logo).url()}
-                  alt={project.logo?.alt || 'Project Logo'}
+                  alt={project.logo.alt || 'Project Logo'}
+                />
+              )}
+              {project.dark_logo && (
+                <Image
+                  className="hidden h-10 w-auto drop-shadow-xl dark:block"
+                  width={
+                    project.dark_logo.asset
+                      ? getImageDimensions(project.dark_logo.asset).width
+                      : undefined
+                  }
+                  height={
+                    project.dark_logo.asset
+                      ? getImageDimensions(project.dark_logo.asset).height
+                      : undefined
+                  }
+                  src={urlFor(project.dark_logo).url()}
+                  alt={project.dark_logo.alt || 'Project Logo'}
                 />
               )}
             </div>

@@ -33,7 +33,6 @@ const ContactForm = () => {
     email: string
     message: string
   }) {
-    console.log(values)
     const result = await sendEmail(values)
 
     if (result?.success) {
@@ -88,7 +87,7 @@ const ContactForm = () => {
                 <Textarea
                   placeholder="...and message and I'll contact you back!"
                   {...field}
-                  className="scrollbar-thin scrollbar-corner-sky-500 min-h-32"
+                  className="min-h-32 scrollbar-thin scrollbar-corner-sky-500"
                 />
               </FormControl>
               <FormMessage />

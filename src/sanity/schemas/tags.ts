@@ -1,4 +1,4 @@
-import { defineField, defineType } from "sanity";
+import { defineField, defineType } from 'sanity'
 
 export default defineType({
   name: 'tag',
@@ -9,11 +9,13 @@ export default defineType({
       name: 'name',
       type: 'string',
       title: 'name',
+      validation: (Rule) => [Rule.required()],
     }),
     defineField({
       name: 'slug',
       type: 'slug',
       title: 'Slug',
+      validation: (Rule) => [Rule.required()],
       options: {
         source: 'name',
       },

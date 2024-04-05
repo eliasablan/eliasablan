@@ -13,7 +13,6 @@ interface EmailData {
 }
 
 export async function sendEmail(data: EmailData) {
-  console.log(data)
   const result = FormSchema.safeParse(data)
 
   if (result.success) {

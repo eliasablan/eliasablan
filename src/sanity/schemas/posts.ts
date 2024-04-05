@@ -13,11 +13,13 @@ export default defineType({
       name: 'title',
       type: 'string',
       title: 'Title',
+      validation: (Rule) => [Rule.required()],
     }),
     defineField({
       name: 'slug',
       type: 'slug',
       title: 'Slug',
+      validation: (Rule) => [Rule.required()],
       options: {
         source: 'title',
       },
@@ -26,11 +28,13 @@ export default defineType({
       name: 'description',
       type: 'text',
       title: 'Description',
+      validation: (Rule) => [Rule.required()],
     }),
     defineField({
       name: 'content',
       type: 'array',
       title: 'Content',
+      validation: (Rule) => [Rule.required()],
       of: [
         { type: 'block' },
         {

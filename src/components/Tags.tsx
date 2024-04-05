@@ -13,19 +13,18 @@ const Tags = async () => {
       </div>
       <div className="w-full text-sm">
         {tags && tags.length > 0 ? (
-          <div className="flex flex-wrap items-baseline justify-center gap-12 py-6 md:justify-start md:gap-6">
+          <div className="flex flex-wrap items-baseline justify-center gap-8 py-6 md:justify-start">
             {tags.map((tag) => (
-              <div>
-                <Link
-                  href={`/tags/${tag.slug}`}
-                  className={cn(
-                    badgeVariants({ variant: 'secondary' }),
-                    'border-2 hover:border-2 hover:border-dashed hover:border-primary'
-                  )}
-                >
-                  #{tag.name}
-                </Link>
-              </div>
+              <Link
+                key={tag?.slug?.current}
+                href={`/tags/${tag?.slug?.current}`}
+                className={cn(
+                  badgeVariants({ variant: 'secondary' }),
+                  'border-2 hover:border-2 hover:border-dashed hover:border-primary'
+                )}
+              >
+                #{tag.name}
+              </Link>
             ))}
           </div>
         ) : (

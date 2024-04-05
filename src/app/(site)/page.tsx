@@ -1,7 +1,6 @@
 import Presentation from '@/components/Presentation'
 import Projects from '@/components/Projects'
 import Blog from '@/components/Blog'
-import Contact from '@/components/Contact'
 import Tags from '@/components/Tags'
 
 export default function Home() {

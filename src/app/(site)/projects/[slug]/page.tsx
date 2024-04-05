@@ -11,12 +11,12 @@ import PortableTextComponents from '@/components/PortableTextComponents'
 import DynamicSanityIcon from '@/components/DynamicSanityIcon'
 import { Badge } from '@/components/ui/badge'
 import { buttonVariants } from '@/components/ui/button'
-import { Project } from '../../../../../sanity.types'
+import { badgeVariants } from '@/components/ui/badge'
 
 export const generateMetadata = async ({ params }: ProjectProps) => {
-  const data = await getProjectData(params.slug)
-  const title = data.name
-  const description = data.short_description
+  const project = await getProjectData(params.slug)
+  const title = project?.name
+  const description = project?.short_description
 
   return {
     title,
@@ -34,7 +34,7 @@ interface ProjectProps {
 }
 
 const project = async ({ params }: ProjectProps) => {
-  const data: Project = await getProjectData(params.slug)
+  const project = await getProjectData(params.slug)
 
   return (
     <main className="relative mx-auto w-full max-w-2xl">
@@ -44,21 +44,21 @@ const project = async ({ params }: ProjectProps) => {
             className="mx-auto mb-4 drop-shadow-xl"
             width={60}
             height={60}
-            src={data.logo ? urlFor(data.logo).url() : ''}
-            alt={data.logo?.alt ?? ''}
+            src={project?.logo ? urlFor(project.logo).url() : ''}
+            alt={project?.logo?.alt ?? ''}
           />
-          <h1 className="mb-4 text-3xl font-extrabold">{data.name}</h1>
+          <h1 className="mb-4 text-3xl font-extrabold">{project?.name}</h1>
           <div className="mx-auto py-3 leading-loose">
-            {data.tech_tools &&
-              data.tech_tools.map((tool: string) => (
+            {project?.tech_tools &&
+              project?.tech_tools.map((tool) => (
                 <Badge key={tool} className="mx-2" variant="outline">
                   {tool}
                 </Badge>
               ))}
           </div>
           <div className="mx-auto py-3">
-            {data.urls &&
-              data.urls.map((url) => (
+            {project?.urls &&
+              project?.urls.map((url) => (
                 <Link
                   key={url._key}
                   className={cn(
@@ -80,9 +80,30 @@ const project = async ({ params }: ProjectProps) => {
           </div>
         </div>
         <PortableText
-          value={data.description || []}
+          value={project?.description || []}
           components={PortableTextComponents}
         />
+
+        <div className="w-full text-sm">
+          {project?.tags && (
+            <div className="flex flex-wrap items-baseline justify-center gap-8 py-6 md:justify-start">
+              {project.tags.map((tag) => {
+                return (
+                  <Link
+                    key={tag?.slug?.current}
+                    href={`/tags/${tag?.slug?.current}`}
+                    className={cn(
+                      badgeVariants({ variant: 'secondary' }),
+                      'border-2 hover:border-2 hover:border-dashed hover:border-primary'
+                    )}
+                  >
+                    #{tag?.slug?.current}
+                  </Link>
+                )
+              })}
+            </div>
+          )}
+        </div>
       </article>
     </main>
   )

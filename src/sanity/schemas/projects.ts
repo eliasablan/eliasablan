@@ -10,11 +10,26 @@ export default defineType({
       name: 'name',
       type: 'string',
       title: 'Name',
+      validation: (Rule) => [Rule.required()],
     }),
     defineField({
       name: 'logo',
       type: 'image',
       title: 'Logo',
+      validation: (Rule) => [Rule.required()],
+      description: 'PNG format',
+      fields: [
+        {
+          name: 'alt',
+          type: 'string',
+          title: 'Alternative Text',
+        },
+      ],
+    }),
+    defineField({
+      name: 'dark_logo',
+      type: 'image',
+      title: 'Dark Logo',
       description: 'PNG format',
       fields: [
         {
@@ -28,6 +43,7 @@ export default defineType({
       name: 'slug',
       type: 'slug',
       title: 'Slug',
+      validation: (Rule) => [Rule.required()],
       options: {
         source: 'name',
       },
@@ -36,6 +52,7 @@ export default defineType({
       name: 'status',
       type: 'string',
       title: 'Status',
+      validation: (Rule) => [Rule.required()],
       options: {
         list: [
           { title: 'Development', value: 'development' },
@@ -49,6 +66,7 @@ export default defineType({
       name: 'short_description',
       type: 'text',
       title: 'Short description',
+      validation: (Rule) => [Rule.required()],
     }),
     defineField({
       name: 'description',
@@ -63,6 +81,7 @@ export default defineType({
               name: 'alt',
               type: 'string',
               title: 'Alternative Text',
+              validation: (Rule) => [Rule.required()],
             },
           ],
         },
@@ -80,16 +99,19 @@ export default defineType({
               name: 'text',
               type: 'string',
               title: 'Text',
+              validation: (Rule) => [Rule.required()],
             },
             {
               name: 'url',
               type: 'url',
               title: 'URL',
+              validation: (Rule) => [Rule.required()],
             },
             {
               name: 'icon',
-              title: 'Icon',
               type: 'iconPicker',
+              title: 'Icon',
+              validation: (Rule) => [Rule.required()],
               options: {
                 providers: ['fa', 'mdi', 'hi', 'fi', 'si'],
                 outputFormat: 'react',

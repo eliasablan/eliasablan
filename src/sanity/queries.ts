@@ -1,70 +1,94 @@
 import { client } from './utils'
+import { QueryParams } from 'next-sanity'
 import {
-  getPostsQuery,
+  // Projects
   getProjectsQuery,
+  getProjectDataQuery,
+  // Posts
+  getPostsQuery,
+  getPostDataQuery,
+  // Tags
   getTagsQuery,
+  getTagDataQuery,
 } from './groqQueries'
-import { Post, Project, Tag } from '../../sanity.types'
+import {
+  // Projects
+  GetProjectsQueryResult,
+  GetProjectDataQueryResult,
+  // Posts
+  GetPostsQueryResult,
+  GetPostDataQueryResult,
+  // Tags
+  GetTagsQueryResult,
+  GetTagDataQueryResult,
+} from '../../sanity.types'
 
-async function sanityFetch({
+async function sanityFetch<QueryResponse>({
   query,
+  params = {},
   tags,
 }: {
   query: string
-  tags: string[]
-}): Promise<any> {
-  return client.fetch(query, {
-    tags,
+  params?: QueryParams
+  tags?: string[]
+}) {
+  return client.fetch<QueryResponse>(query, params, {
+    next: {
+      tags,
+    },
   })
 }
 
-export async function getProjects(): Promise<Project[]> {
+// Projects Queries
+export async function getProjects(): Promise<GetProjectsQueryResult> {
   return sanityFetch({
     query: getProjectsQuery,
     tags: ['project'],
   })
 }
 
-export async function getPosts(): Promise<Post[]> {
+export async function getProjectData(
+  slug: string
+): Promise<GetProjectDataQueryResult> {
+  return await sanityFetch({
+    query: getProjectDataQuery,
+    params: { slug },
+    tags: [`project:${slug}`],
+  })
+}
+
+// Posts Queries
+export async function getPosts(): Promise<GetPostsQueryResult> {
   return sanityFetch({
     query: getPostsQuery,
     tags: ['post'],
   })
 }
 
-export async function getTags(): Promise<Tag[]> {
+export async function getPostData(
+  slug: string
+): Promise<GetPostDataQueryResult> {
+  return await sanityFetch({
+    query: getPostDataQuery,
+    params: { slug: slug },
+    tags: [`post:${slug}`],
+  })
+}
+
+// Tags Queries
+export async function getTags(): Promise<GetTagsQueryResult> {
   return sanityFetch({
     query: getTagsQuery,
     tags: ['tag'],
   })
 }
 
-export async function getPostData(slug: string): Promise<Post> {
-  const query = `*[_type=='post' && slug.current == "${slug}"][0] {
-    _id,
-    title,
-    description,
-    content,
-    og_image,
-    _createdAt
-  }`
-
-  const post = await sanityFetch({ query, tags: ['post'] })
-
-  return post
-}
-
-export async function getProjectData(slug: string): Promise<Project> {
-  const query = `*[_type=='project' && slug.current == "${slug}"][0] {
-    name,
-    short_description,
-    description,
-    logo,
-    tech_tools,
-    urls,
-  }`
-
-  const project = await sanityFetch({ query, tags: ['project'] })
-
-  return project
+export async function getTagData(
+  slug: string
+): Promise<GetTagDataQueryResult> {
+  return await sanityFetch({
+    query: getTagDataQuery,
+    params: { slug: slug },
+    tags: [`tag:${slug}`],
+  })
 }

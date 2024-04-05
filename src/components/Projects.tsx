@@ -1,5 +1,6 @@
-import { getProjects } from '@/sanity/queries'
+import { Project } from '../../sanity.types'
 import ProjectSquare from './ProjectSquare'
+import { getProjects } from '@/sanity/queries'
 
 const Projects = async () => {
   const projects = await getProjects()
@@ -10,7 +11,10 @@ const Projects = async () => {
       <div className="mt-4 grid grid-cols-2 gap-4 md:grid-cols-3">
         {projects && projects.length > 0 ? (
           projects.map((project) => (
-            <ProjectSquare key={project.slug?.current} project={project} />
+            <ProjectSquare
+              key={project.slug?.current}
+              project={project as Project}
+            />
           ))
         ) : (
           <h1>No projects right now</h1>
