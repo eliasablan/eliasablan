@@ -18,7 +18,9 @@ export async function POST(req: NextRequest) {
     }
 
     revalidateTag(body._type)
-    revalidateTag(`${body._type}:${body.slug}`)
+    if (body.slug) {
+      revalidateTag(`${body._type}:${body.slug}`)
+    }
 
     return NextResponse.json({
       status: 200,
