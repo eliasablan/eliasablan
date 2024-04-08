@@ -1,6 +1,9 @@
 import { client } from './utils'
 import { QueryParams } from 'next-sanity'
 import {
+  // Home and Settings
+  getHomeQuery,
+  getSettingsQuery,
   // Projects
   getProjectsQuery,
   getProjectsByTagQuery,
@@ -25,6 +28,8 @@ import {
   // Tags
   GetTagsQueryResult,
   GetTagDataQueryResult,
+  GetHomeQueryResult,
+  GetSettingsQueryResult,
 } from '../../sanity.types'
 
 async function sanityFetch<QueryResponse>({
@@ -42,6 +47,21 @@ async function sanityFetch<QueryResponse>({
     next: {
       tags,
     },
+  })
+}
+
+// Home and Settings
+export async function getHome(): Promise<GetHomeQueryResult> {
+  return sanityFetch({
+    query: getHomeQuery,
+    tags: ['home'],
+  })
+}
+
+export async function getSettings(): Promise<GetSettingsQueryResult> {
+  return sanityFetch({
+    query: getSettingsQuery,
+    tags: ['settings'],
   })
 }
 

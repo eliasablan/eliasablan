@@ -1,5 +1,14 @@
 import { groq } from 'next-sanity'
 
+// Home and Settings Queries
+export const getHomeQuery = groq`*[_type=='home'][0] {
+  ...
+}`
+
+export const getSettingsQuery = groq`*[_type=='settings'][0] {
+  ...
+}`
+
 // Posts Queries
 export const getPostsQuery = groq`*[_type=='post'] | order(_createdAt desc)[0..9] {
   _id,
