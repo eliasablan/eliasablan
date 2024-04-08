@@ -99,22 +99,22 @@ export const HomePortableTextComponents: Partial<PortableTextReactComponents> =
     },
     block: {
       h1: ({ children }: { children?: React.ReactNode }) => (
-        <h1 className="mb-10 text-6xl">{children}</h1>
+        <h1 className="mb-8 text-5xl">{children}</h1>
       ),
       h2: ({ children }: { children?: React.ReactNode }) => (
-        <h2 className="mb-10 text-5xl">{children}</h2>
+        <h2 className="mb-8 text-4xl">{children}</h2>
       ),
       h3: ({ children }: { children?: React.ReactNode }) => (
-        <h3 className="mb-9 text-4xl">{children}</h3>
+        <h3 className="mb-7 text-3xl">{children}</h3>
       ),
       h4: ({ children }: { children?: React.ReactNode }) => (
-        <h4 className="mb-9 text-3xl">{children}</h4>
+        <h4 className="mb-7 text-2xl">{children}</h4>
       ),
       h5: ({ children }: { children?: React.ReactNode }) => (
-        <h5 className="mb-8 text-2xl">{children}</h5>
+        <h5 className="mb-6 text-xl">{children}</h5>
       ),
       h6: ({ children }: { children?: React.ReactNode }) => (
-        <h6 className="mb-8 text-xl">{children}</h6>
+        <h6 className="mb-6 text-lg">{children}</h6>
       ),
       blockquote: ({ children }: { children?: React.ReactNode }) => (
         <blockquote className="my-3 border-l-2 border-l-primary pl-2">
