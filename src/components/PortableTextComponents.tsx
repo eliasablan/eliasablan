@@ -75,7 +75,7 @@ const PortableTextComponents: Partial<PortableTextReactComponents> = {
         <a
           href={value?.href}
           rel={rel}
-          className="underline underline-offset-4 hover:font-semibold"
+          className="underline underline-offset-4 hover:font-semibold hover:decoration-dashed"
         >
           {children}
         </a>
@@ -160,7 +160,7 @@ export const HomePortableTextComponents: Partial<PortableTextReactComponents> =
           <a
             href={value?.href}
             rel={rel}
-            className="underline underline-offset-4 hover:font-semibold"
+            className="underline underline-offset-4 hover:font-semibold hover:decoration-dashed"
           >
             {children}
           </a>
