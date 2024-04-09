@@ -85,8 +85,21 @@ export type Post = {
   _updatedAt: string;
   _rev: string;
   title?: string;
-  slug?: Slug;
   description?: string;
+  slug?: Slug;
+  seo_title?: string;
+  seo_description?: string;
+  og_image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
   content?: Array<{
     children?: Array<{
       marks?: Array<string>;
@@ -124,6 +137,16 @@ export type Post = {
     _key: string;
     [internalGroqTypeReferenceTo]?: "tag";
   }>;
+};
+
+export type Project = {
+  _id: string;
+  _type: "project";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  short_description?: string;
   og_image?: {
     asset?: {
       _ref: string;
@@ -135,15 +158,7 @@ export type Post = {
     crop?: SanityImageCrop;
     _type: "image";
   };
-};
-
-export type Project = {
-  _id: string;
-  _type: "project";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  name?: string;
+  slug?: Slug;
   logo?: {
     asset?: {
       _ref: string;
@@ -168,9 +183,7 @@ export type Project = {
     alt?: string;
     _type: "image";
   };
-  slug?: Slug;
   status?: "development" | "completed" | "deployed";
-  short_description?: string;
   description?: Array<{
     children?: Array<{
       marks?: Array<string>;
@@ -215,17 +228,6 @@ export type Project = {
     [internalGroqTypeReferenceTo]?: "tag";
   }>;
   tech_tools?: Array<string>;
-  og_image?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
 };
 
 export type Slug = {
@@ -294,6 +296,18 @@ export type Home = {
   _updatedAt: string;
   _rev: string;
   title?: string;
+  seo_description?: string;
+  og_image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
   overview?: Array<{
     children?: Array<{
       marks?: Array<string>;
@@ -323,13 +337,6 @@ export type Home = {
     alt?: string;
     _type: "image";
     _key: string;
-  }>;
-  showcaseProjects?: Array<{
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: "project";
   }>;
 };
 
@@ -400,15 +407,23 @@ export declare const internalGroqTypeReferenceTo: unique symbol;
 
 // Source: ./src/sanity/groqQueries.ts
 // Variable: getHomeQuery
-// Query: *[_type=='home'][0] {  ...}
+// Query: *[_type=='home'][0] {  _id,  title,  seo_description,  og_image,  overview}
 export type GetHomeQueryResult = {
   _id: string;
-  _type: "home";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-  overview?: Array<{
+  title: string | null;
+  seo_description: string | null;
+  og_image: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  } | null;
+  overview: Array<{
     asset?: {
       _ref: string;
       _type: "reference";
@@ -437,14 +452,7 @@ export type GetHomeQueryResult = {
     level?: number;
     _type: "block";
     _key: string;
-  }>;
-  showcaseProjects?: Array<{
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: "project";
-  }>;
+  }> | null;
 } | null;
 // Variable: getSettingsQuery
 // Query: *[_type=='settings'][0] {  ...}

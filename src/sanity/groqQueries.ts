@@ -2,7 +2,11 @@ import { groq } from 'next-sanity'
 
 // Home and Settings Queries
 export const getHomeQuery = groq`*[_type=='home'][0] {
-  ...
+  _id,
+  title,
+  seo_description,
+  og_image,
+  overview
 }`
 
 export const getSettingsQuery = groq`*[_type=='settings'][0] {

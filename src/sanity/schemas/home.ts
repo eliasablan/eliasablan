@@ -1,30 +1,77 @@
 import { HomeIcon } from '@sanity/icons'
 import { defineArrayMember, defineField, defineType } from 'sanity'
+import {
+  OGMediaEditor,
+  OGMediaIcon,
+} from '@/components/sanity/OGMediaEditor'
 
 export default defineType({
   name: 'home',
   title: 'Home',
   type: 'document',
   icon: HomeIcon,
+  groups: [
+    {
+      name: 'content',
+      title: 'Content',
+      default: true,
+    },
+  ],
+  fieldsets: [
+    {
+      name: 'seo',
+      title: 'SEO',
+      description: 'Set up your metadata for SEO here.',
+      options: {
+        collapsible: true, // Makes the whole fieldset collapsible
+        collapsed: true, // Defines if the fieldset should be collapsed by default or not
+        modal: { type: 'popover' }, // Makes the modal type a popover
+      },
+    },
+  ],
   // Uncomment below to have edits publish automatically as you type
   // liveEdit: true,
   fields: [
     defineField({
       name: 'title',
-      description: 'This field is the title of your personal website.',
+      description: 'Used for the <meta> title tag for SEO.',
       title: 'Title',
       type: 'string',
-      validation: (rule) => rule.required(),
+      validation: (rule) => rule.min(8).max(60),
+      fieldset: 'seo',
+    }),
+    defineField({
+      name: 'seo_description',
+      description: 'Used for the <meta> description tag for SEO.',
+      title: ' SEO Description',
+      type: 'text',
+      validation: (rule) => rule.min(70).max(155),
+      fieldset: 'seo',
+    }),
+    defineField({
+      name: 'og_image',
+      title: 'OG image',
+      type: 'image',
+      options: {
+        sources: [
+          {
+            name: 'sharing-image',
+            title: 'Generate Image',
+            icon: OGMediaIcon,
+            component: OGMediaEditor,
+          },
+        ],
+      },
+      fieldset: 'seo',
     }),
     defineField({
       name: 'overview',
-      description:
-        'Used both for the <meta> description tag for SEO, and the personal website subheader.',
-      title: 'Description',
+      description: 'Set your homepage content here.',
+      title: 'Page Content',
       type: 'array',
       of: [
-        { type: 'block' },
-        {
+        defineArrayMember({ type: 'block' }),
+        defineArrayMember({
           type: 'image',
           fields: [
             {
@@ -33,22 +80,10 @@ export default defineType({
               title: 'Alternative Text',
             },
           ],
-        },
-      ],
-      validation: (rule) => rule.max(155).required(),
-    }),
-    defineField({
-      name: 'showcaseProjects',
-      title: 'Showcase projects',
-      description:
-        'These are the projects that will appear first on your landing page.',
-      type: 'array',
-      of: [
-        defineArrayMember({
-          type: 'reference',
-          to: [{ type: 'project' }],
         }),
       ],
+      validation: (rule) => rule.required(),
+      group: 'content',
     }),
   ],
   preview: {
@@ -58,7 +93,7 @@ export default defineType({
     prepare({ title }) {
       return {
         subtitle: 'Home',
-        title,
+        title: title || 'Home',
       }
     },
   },

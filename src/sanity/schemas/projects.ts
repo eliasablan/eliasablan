@@ -1,4 +1,5 @@
-import { defineField, defineType } from 'sanity'
+import { defineField, defineType, defineArrayMember } from 'sanity'
+import { ProjectsIcon } from '@sanity/icons'
 import { preview } from 'sanity-plugin-icon-picker'
 import {
   OGMediaEditor,
@@ -9,39 +10,74 @@ export default defineType({
   name: 'project',
   type: 'document',
   title: 'Projects',
+  icon: ProjectsIcon,
+  groups: [
+    {
+      name: 'content',
+      title: 'Content',
+      default: true,
+    },
+  ],
+  fieldsets: [
+    {
+      name: 'seo',
+      title: 'SEO',
+      description: 'Set up your metadata for SEO here.',
+      options: {
+        collapsible: true, // Makes the whole fieldset collapsible
+        collapsed: true, // Defines if the fieldset should be collapsed by default or not
+        modal: { type: 'popover' }, // Makes the modal type a popover
+      },
+    },
+    {
+      name: 'logo',
+      title: 'Logo',
+      description:
+        'Light Mode logo is required. Dark Mode logo is optional.',
+      options: {
+        collapsible: true, // Makes the whole fieldset collapsible
+        collapsed: true, // Defines if the fieldset should be collapsed by default or not
+        modal: { type: 'popover' }, // Makes the modal type a popover
+      },
+    },
+  ],
   fields: [
     defineField({
       name: 'name',
+      description:
+        'This field is the name shown by your project and your <meta> title tag for SEO.',
       type: 'string',
       title: 'Name',
       validation: (Rule) => [Rule.required().min(8).max(30)],
+      fieldset: 'seo',
+      group: 'content',
     }),
     defineField({
-      name: 'logo',
-      type: 'image',
-      title: 'Logo',
-      validation: (Rule) => [Rule.required()],
-      description: 'PNG format',
-      fields: [
-        {
-          name: 'alt',
-          type: 'string',
-          title: 'Alternative Text',
-        },
-      ],
+      name: 'short_description',
+      type: 'text',
+      title: 'Short description',
+      description:
+        'This field is the short description given by your project and your <meta> description tag for SEO.',
+      validation: (Rule) => [Rule.required().min(70).max(155)],
+      fieldset: 'seo',
+      group: 'content',
     }),
     defineField({
-      name: 'dark_logo',
+      name: 'og_image',
+      title: 'OG image',
       type: 'image',
-      title: 'Dark Logo',
-      description: 'PNG format',
-      fields: [
-        {
-          name: 'alt',
-          type: 'string',
-          title: 'Alternative Text',
-        },
-      ],
+      options: {
+        sources: [
+          {
+            name: 'sharing-image',
+            title: 'Generate Image',
+            icon: OGMediaIcon,
+            component: OGMediaEditor,
+          },
+        ],
+      },
+      fieldset: 'seo',
+      group: 'content',
     }),
     defineField({
       name: 'slug',
@@ -50,7 +86,42 @@ export default defineType({
       validation: (Rule) => [Rule.required()],
       options: {
         source: 'name',
+        maxLength: 50,
+        isUnique: (value, context) =>
+          context.defaultIsUnique(value, context),
       },
+    }),
+    defineField({
+      name: 'logo',
+      type: 'image',
+      title: '☀️ Light Mode',
+      validation: (Rule) => [Rule.required()],
+      description:
+        'If only Light Mode logo is set then it will work for both modes. ',
+      fields: [
+        {
+          name: 'alt',
+          type: 'string',
+          title: '☀️ Alternative Text',
+        },
+      ],
+      group: 'content',
+      fieldset: 'logo',
+    }),
+    defineField({
+      name: 'dark_logo',
+      type: 'image',
+      title: '🌜 Dark Mode',
+      description: 'If Dark Mode logo is set then they will alternate. ',
+      fields: [
+        {
+          name: 'alt',
+          type: 'string',
+          title: '🌜 Alternative Text',
+        },
+      ],
+      group: 'content',
+      fieldset: 'logo',
     }),
     defineField({
       name: 'status',
@@ -67,18 +138,12 @@ export default defineType({
       initialValue: 'development',
     }),
     defineField({
-      name: 'short_description',
-      type: 'text',
-      title: 'Short description',
-      validation: (Rule) => [Rule.required().min(50).max(155)],
-    }),
-    defineField({
       name: 'description',
       type: 'array',
-      title: 'Long description',
+      title: 'Project description',
       of: [
-        { type: 'block' },
-        {
+        defineArrayMember({ type: 'block' }),
+        defineArrayMember({
           type: 'image',
           fields: [
             {
@@ -88,15 +153,16 @@ export default defineType({
               validation: (Rule) => [Rule.required()],
             },
           ],
-        },
+        }),
       ],
+      group: 'content',
     }),
     defineField({
       name: 'urls',
       type: 'array',
       title: 'URL Links',
       of: [
-        {
+        defineArrayMember({
           type: 'object',
           fields: [
             {
@@ -137,7 +203,7 @@ export default defineType({
               }
             },
           },
-        },
+        }),
       ],
     }),
     defineField({
@@ -145,32 +211,17 @@ export default defineType({
       type: 'array',
       title: 'Tags',
       of: [
-        {
+        defineArrayMember({
           type: 'reference',
           to: [{ type: 'tag' }],
-        },
+        }),
       ],
     }),
     defineField({
       name: 'tech_tools',
       type: 'array',
       title: 'Technologies',
-      of: [{ type: 'string' }],
-    }),
-    defineField({
-      name: 'og_image',
-      title: 'OG image',
-      type: 'image',
-      options: {
-        sources: [
-          {
-            name: 'sharing-image',
-            title: 'Generate Image',
-            icon: OGMediaIcon,
-            component: OGMediaEditor,
-          },
-        ],
-      },
+      of: [defineArrayMember({ type: 'string' })],
     }),
   ],
 })

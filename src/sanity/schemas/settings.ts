@@ -6,6 +6,17 @@ export default defineType({
   title: 'Settings',
   type: 'document',
   icon: CogIcon,
+  groups: [
+    {
+      name: 'content',
+      title: 'Content',
+      default: true,
+    },
+    {
+      name: 'seo',
+      title: 'SEO',
+    },
+  ],
   // Uncomment below to have edits publish automatically as you type
   // liveEdit: true,
   fields: [
