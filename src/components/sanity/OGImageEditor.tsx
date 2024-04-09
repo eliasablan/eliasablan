@@ -78,7 +78,7 @@ const Component = ({ title, subtitle }: Props) => {
   )
 }
 
-const OGImageEditor = {
+const OGImageEditor: any = {
   name: 'ogImage1200',
   component: Component,
   prepare: (document: { title: string; subtitle: string }) => ({
