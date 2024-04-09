@@ -1,3 +1,4 @@
+'use server'
 import { client } from './utils'
 import { QueryParams } from 'next-sanity'
 import {
@@ -79,7 +80,7 @@ export async function getProjectsByTag(
   return sanityFetch({
     query: getProjectsByTagQuery,
     params: { slug },
-    tags: ['project'],
+    tags: ['project', 'tag'],
   })
 }
 
