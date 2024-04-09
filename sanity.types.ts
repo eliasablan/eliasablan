@@ -643,7 +643,7 @@ export type GetProjectsByTagQueryResult = Array<{
   tech_tools: Array<string> | null;
 }>;
 // Variable: getProjectDataQuery
-// Query: *[_type=='project' && slug.current == $slug][0] {    _id,    name,    short_description,    description,    logo,    dark_logo,    tech_tools,    urls,    tags[]->{      name,      slug    }  }
+// Query: *[_type=='project' && slug.current == $slug][0] {    _id,    name,    short_description,    description,    logo,    dark_logo,    tech_tools,    urls,    og_image,    tags[]->{      name,      slug    }  }
 export type GetProjectDataQueryResult = {
   _id: string;
   name: string | null;
@@ -709,6 +709,17 @@ export type GetProjectDataQueryResult = {
     icon?: IconPicker;
     _key: string;
   }> | null;
+  og_image: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  } | null;
   tags: Array<{
     name: string | null;
     slug: Slug | null;

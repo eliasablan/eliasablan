@@ -28,7 +28,7 @@ export default defineType({
       name: 'description',
       type: 'text',
       title: 'Description',
-      validation: (Rule) => [Rule.required()],
+      validation: (Rule) => [Rule.required().min(50).max(155)],
     }),
     defineField({
       name: 'content',

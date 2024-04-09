@@ -14,7 +14,7 @@ export default defineType({
       name: 'name',
       type: 'string',
       title: 'Name',
-      validation: (Rule) => [Rule.required()],
+      validation: (Rule) => [Rule.required().min(8).max(30)],
     }),
     defineField({
       name: 'logo',
@@ -70,7 +70,7 @@ export default defineType({
       name: 'short_description',
       type: 'text',
       title: 'Short description',
-      validation: (Rule) => [Rule.required()],
+      validation: (Rule) => [Rule.required().min(50).max(155)],
     }),
     defineField({
       name: 'description',

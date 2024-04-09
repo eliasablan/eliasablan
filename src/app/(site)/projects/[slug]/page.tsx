@@ -18,12 +18,15 @@ export const generateMetadata = async ({ params }: ProjectProps) => {
   const project = await getProjectData(params.slug)
   const title = project?.name
   const description = project?.short_description
+  const og_image = project?.og_image
+    ? urlFor(project?.og_image).url()
+    : undefined
 
   return {
     title,
     description,
     openGraph: {
-      images: [],
+      images: [og_image],
     },
   }
 }
