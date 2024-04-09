@@ -46,7 +46,7 @@ const project = async ({ params }: ProjectProps) => {
           {project?.logo && (
             <Image
               className={cn(
-                'mx-auto h-10 w-auto drop-shadow-xl',
+                'mx-auto h-12 w-auto drop-shadow-xl',
                 project.dark_logo && 'dark:hidden'
               )}
               width={
@@ -65,7 +65,7 @@ const project = async ({ params }: ProjectProps) => {
           )}
           {project?.dark_logo && (
             <Image
-              className="mx-auto hidden h-10 w-auto drop-shadow-xl dark:block"
+              className="mx-auto hidden h-12 w-auto drop-shadow-xl dark:block"
               width={
                 project.dark_logo.asset
                   ? getImageDimensions(project.dark_logo.asset).width
@@ -80,7 +80,7 @@ const project = async ({ params }: ProjectProps) => {
               alt={project.dark_logo.alt || 'Project Logo'}
             />
           )}
-          <h1 className="mb-4 text-3xl font-extrabold">{project?.name}</h1>
+          <h1 className="my-4 text-3xl font-extrabold">{project?.name}</h1>
           <div className="mx-auto py-3 leading-loose">
             {project?.tech_tools &&
               project?.tech_tools.map((tool) => (
