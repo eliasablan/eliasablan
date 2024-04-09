@@ -1,9 +1,12 @@
 import React from 'react'
+import Link from 'next/link'
 import { PortableText } from '@portabletext/react'
 import PortableTextComponents from '@/components/PortableTextComponents'
 import { DateJSX } from '@/components/Date'
 import { getPostData } from '@/sanity/queries'
 import { urlFor } from '@/sanity/utils'
+import { cn } from '@/lib/utils'
+import { badgeVariants } from '@/components/ui/badge'
 
 interface PostProps {
   params: {
@@ -44,6 +47,26 @@ const blogPost = async ({ params }: PostProps) => {
           value={post?.content || []}
           components={PortableTextComponents}
         />
+        <div className="w-full text-sm">
+          {post?.tags && (
+            <div className="flex flex-wrap items-baseline justify-center gap-8 py-6 md:justify-start">
+              {post.tags.map((tag) => {
+                return (
+                  <Link
+                    key={tag?.slug?.current}
+                    href={`/tags/${tag?.slug?.current}`}
+                    className={cn(
+                      badgeVariants({ variant: 'secondary' }),
+                      'border-2 hover:border-2 hover:border-dashed hover:border-primary'
+                    )}
+                  >
+                    #{tag?.slug?.current}
+                  </Link>
+                )
+              })}
+            </div>
+          )}
+        </div>
       </article>
     </main>
   )

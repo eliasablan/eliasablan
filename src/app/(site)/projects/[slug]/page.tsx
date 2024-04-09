@@ -10,9 +10,8 @@ import { cn } from '@/lib/utils'
 
 import PortableTextComponents from '@/components/PortableTextComponents'
 import DynamicSanityIcon from '@/components/DynamicSanityIcon'
-import { Badge } from '@/components/ui/badge'
+import { Badge, badgeVariants } from '@/components/ui/badge'
 import { buttonVariants } from '@/components/ui/button'
-import { badgeVariants } from '@/components/ui/badge'
 
 export const generateMetadata = async ({ params }: ProjectProps) => {
   const project = await getProjectData(params.slug)
