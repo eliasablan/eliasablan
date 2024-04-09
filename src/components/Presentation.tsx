@@ -1,9 +1,10 @@
 import React from 'react'
 import { PortableText } from '@portabletext/react'
 import { HomePortableTextComponents } from '@/components/PortableTextComponents'
-import { GetHomeQueryResult } from '../../sanity.types'
+import { getHome } from '@/sanity/queries'
 
-const Presentation = ({ data }: { data: GetHomeQueryResult }) => {
+const Presentation = async () => {
+  const data = await getHome()
   return (
     <div className="pt-8 md:pt-20">
       <PortableText
