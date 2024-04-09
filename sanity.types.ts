@@ -287,6 +287,52 @@ export type Settings = {
   };
 };
 
+export type Home = {
+  _id: string;
+  _type: "home";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  overview?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  } | {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+    _key: string;
+  }>;
+  showcaseProjects?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "project";
+  }>;
+};
+
 export type SanityImageCrop = {
   _type: "sanity.imageCrop";
   top?: number;
@@ -344,40 +390,6 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
-export type Home = {
-  _id: string;
-  _type: "home";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-  overview?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal";
-    listItem?: never;
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
-  showcaseProjects?: Array<{
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: "project";
-  }>;
-};
-
 export type IconPicker = {
   _type: "iconPicker";
   provider?: string;
@@ -397,14 +409,26 @@ export type GetHomeQueryResult = {
   _rev: string;
   title?: string;
   overview?: Array<{
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+    _key: string;
+  } | {
     children?: Array<{
       marks?: Array<string>;
       text?: string;
       _type: "span";
       _key: string;
     }>;
-    style?: "normal";
-    listItem?: never;
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+    listItem?: "bullet" | "number";
     markDefs?: Array<{
       href?: string;
       _type: "link";
@@ -619,7 +643,7 @@ export type GetProjectsByTagQueryResult = Array<{
   tech_tools: Array<string> | null;
 }>;
 // Variable: getProjectDataQuery
-// Query: *[_type=='project' && slug.current == $slug][0] {    _id,    name,    short_description,    description,    logo,    tech_tools,    urls,    tags[]->{      name,      slug    }  }
+// Query: *[_type=='project' && slug.current == $slug][0] {    _id,    name,    short_description,    description,    logo,    dark_logo,    tech_tools,    urls,    tags[]->{      name,      slug    }  }
 export type GetProjectDataQueryResult = {
   _id: string;
   name: string | null;
@@ -655,6 +679,18 @@ export type GetProjectDataQueryResult = {
     _key: string;
   }> | null;
   logo: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  } | null;
+  dark_logo: {
     asset?: {
       _ref: string;
       _type: "reference";

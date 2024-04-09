@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 import { getProjectData } from '@/sanity/queries'
+import { getImageDimensions } from '@sanity/asset-utils'
 import { urlFor } from '@/sanity/utils'
 import { cn } from '@/lib/utils'
 
@@ -40,13 +41,43 @@ const project = async ({ params }: ProjectProps) => {
     <main className="relative mx-auto w-full max-w-2xl">
       <article className="px-6 pb-28 pt-8 md:mt-6 md:pt-16">
         <div className="mx-auto mb-10 block max-w-sm text-center">
-          <Image
-            className="mx-auto mb-4 drop-shadow-xl"
-            width={60}
-            height={60}
-            src={project?.logo ? urlFor(project.logo).url() : ''}
-            alt={project?.logo?.alt ?? ''}
-          />
+          {project?.logo && (
+            <Image
+              className={cn(
+                'mx-auto h-10 w-auto drop-shadow-xl',
+                project.dark_logo && 'dark:hidden'
+              )}
+              width={
+                project.logo.asset
+                  ? getImageDimensions(project.logo.asset).width
+                  : undefined
+              }
+              height={
+                project.logo.asset
+                  ? getImageDimensions(project.logo.asset).height
+                  : undefined
+              }
+              src={urlFor(project.logo).url()}
+              alt={project.logo.alt || 'Project Logo'}
+            />
+          )}
+          {project?.dark_logo && (
+            <Image
+              className="mx-auto hidden h-10 w-auto drop-shadow-xl dark:block"
+              width={
+                project.dark_logo.asset
+                  ? getImageDimensions(project.dark_logo.asset).width
+                  : undefined
+              }
+              height={
+                project.dark_logo.asset
+                  ? getImageDimensions(project.dark_logo.asset).height
+                  : undefined
+              }
+              src={urlFor(project.dark_logo).url()}
+              alt={project.dark_logo.alt || 'Project Logo'}
+            />
+          )}
           <h1 className="mb-4 text-3xl font-extrabold">{project?.name}</h1>
           <div className="mx-auto py-3 leading-loose">
             {project?.tech_tools &&

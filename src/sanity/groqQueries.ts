@@ -65,6 +65,7 @@ export const getProjectDataQuery = groq`*[_type=='project' && slug.current == $s
     short_description,
     description,
     logo,
+    dark_logo,
     tech_tools,
     urls,
     tags[]->{
