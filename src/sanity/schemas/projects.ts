@@ -48,7 +48,7 @@ export default defineType({
         'This field is the name shown by your project and your <meta> title tag for SEO.',
       type: 'string',
       title: 'Name',
-      validation: (Rule) => [Rule.required().min(8).max(30)],
+      validation: (Rule) => [Rule.required().min(10).max(60)],
       fieldset: 'seo',
       group: 'content',
     }),

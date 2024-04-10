@@ -35,7 +35,7 @@ export default defineType({
       description: 'This field is the title of your post.',
       type: 'string',
       title: 'Title',
-      validation: (Rule) => [Rule.required()],
+      validation: (Rule) => [Rule.required().min(10).max(60)],
       group: 'content',
     }),
     defineField({
