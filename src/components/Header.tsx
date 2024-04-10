@@ -23,6 +23,8 @@ const Header = ({ items }: HeaderProps) => {
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
 
+  console.log({ pathname, items })
+
   return (
     <motion.div
       initial={{ y: -100, opacity: 0 }}
@@ -52,7 +54,7 @@ const Header = ({ items }: HeaderProps) => {
                 >
                   <path
                     d="M152,208V160a8,8,0,0,0-8-8H112a8,8,0,0,0-8,8v48a8,8,0,0,1-8,8H48a8,8,0,0,1-8-8V115.5a8.3,8.3,0,0,1,2.6-5.9l80-72.7a8,8,0,0,1,10.8,0l80,72.7a8.3,8.3,0,0,1,2.6,5.9V208a8,8,0,0,1-8,8H160A8,8,0,0,1,152,208Z"
-                    fill="none"
+                    fill="true"
                     stroke="currentColor"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -67,7 +69,7 @@ const Header = ({ items }: HeaderProps) => {
                   href={link.url || '/'}
                   className={cn(
                     'flex w-full items-center rounded-lg px-[8px] py-[6px] capitalize transition-all duration-150 ease-in-out hover:bg-secondary md:py-[3px]',
-                    pathname === link.url && 'bg-secondary'
+                    pathname.slice(1) === link.url && 'bg-secondary'
                   )}
                 >
                   {link.icon && (
@@ -360,8 +362,8 @@ const Header = ({ items }: HeaderProps) => {
                 <Link
                   href="/"
                   className={cn(
-                    'my-4 flex w-full items-center rounded-lg p-4 font-extrabold capitalize transition-all duration-150 ease-in-out hover:bg-secondary',
-                    pathname === '/' && 'bg-secondary'
+                    'my-4 flex w-full items-center rounded-lg p-4 capitalize transition-all duration-150 ease-in-out hover:bg-secondary',
+                    pathname.slice(1) === '/' && 'bg-secondary'
                   )}
                 >
                   <svg
@@ -389,8 +391,8 @@ const Header = ({ items }: HeaderProps) => {
                   <Link
                     href={link.url || '/'}
                     className={cn(
-                      'my-4 flex w-full items-center rounded-lg p-4 font-extrabold capitalize transition-all duration-150 ease-in-out hover:bg-secondary',
-                      pathname === link.url && 'bg-secondary'
+                      'my-4 flex w-full items-center rounded-lg p-4 capitalize transition-all duration-150 ease-in-out hover:bg-secondary',
+                      pathname.slice(1) === link.url && 'bg-secondary'
                     )}
                   >
                     {link.icon && (
