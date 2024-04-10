@@ -1,5 +1,6 @@
 import { CogIcon } from '@sanity/icons'
 import { defineArrayMember, defineField, defineType } from 'sanity'
+import { preview } from 'sanity-plugin-icon-picker'
 
 export default defineType({
   name: 'settings',
@@ -10,75 +11,71 @@ export default defineType({
     {
       name: 'content',
       title: 'Content',
-      default: true,
     },
     {
-      name: 'seo',
-      title: 'SEO',
+      name: 'menu_links',
+      title: 'Menu Links',
+      default: true,
     },
   ],
   // Uncomment below to have edits publish automatically as you type
   // liveEdit: true,
   fields: [
     defineField({
-      name: 'menuItems',
-      title: 'Menu Item list',
-      description: 'Links displayed on the header of your site.',
+      name: 'urls',
       type: 'array',
+      title: 'URL Links',
       of: [
-        {
-          title: 'Reference',
-          type: 'reference',
-          to: [
+        defineArrayMember({
+          type: 'object',
+          fields: [
             {
-              type: 'home',
+              name: 'text',
+              type: 'string',
+              title: 'Text',
+              validation: (Rule) => [Rule.required()],
             },
             {
-              type: 'post',
+              name: 'url',
+              type: 'string',
+              title: 'URL',
+              validation: (Rule) => [Rule.required()],
             },
             {
-              type: 'project',
+              name: 'icon',
+              type: 'iconPicker',
+              title: 'Icon',
+              options: {
+                providers: ['fa', 'mdi', 'hi', 'fi', 'si'],
+                outputFormat: 'react',
+              },
             },
           ],
-        },
+          preview: {
+            select: {
+              title: 'text',
+              subtitle: 'string',
+              icon: 'icon',
+            },
+            prepare(selection) {
+              const { title, subtitle, icon } = selection
+              return {
+                title: title,
+                subtitle: subtitle,
+                media: preview(icon),
+              }
+            },
+          },
+        }),
       ],
+      group: 'menu_links',
     }),
     defineField({
       name: 'footer',
       description:
         'This is a block of text that will be displayed at the bottom of the page.',
       title: 'Footer Info',
-      type: 'array',
-      of: [
-        defineArrayMember({
-          type: 'block',
-          marks: {
-            annotations: [
-              {
-                name: 'link',
-                type: 'object',
-                title: 'Link',
-                fields: [
-                  {
-                    name: 'href',
-                    type: 'url',
-                    title: 'Url',
-                  },
-                ],
-              },
-            ],
-          },
-        }),
-      ],
-    }),
-    defineField({
-      name: 'ogImage',
-      title: 'Open Graph Image',
-      type: 'image',
-      description: 'Displayed on social cards and search engine results.',
-      options: {
-        hotspot: true,
-      },
+      type: 'text',
     }),
   ],
   preview: {

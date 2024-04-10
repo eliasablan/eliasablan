@@ -17,21 +17,7 @@ import {
   getTagsQuery,
   getTagDataQuery,
 } from './groqQueries'
-import {
-  // Projects
-  GetProjectsQueryResult,
-  GetProjectsByTagQueryResult,
-  GetProjectDataQueryResult,
-  // Posts
-  GetPostsQueryResult,
-  GetPostsByTagQueryResult,
-  GetPostDataQueryResult,
-  // Tags
-  GetTagsQueryResult,
-  GetTagDataQueryResult,
-  GetHomeQueryResult,
-  GetSettingsQueryResult,
-} from '../../sanity.types'
+import { Home, Settings, Post, Project, Tag } from '../../sanity.types'
 
 async function sanityFetch<QueryResponse>({
   query,
@@ -52,14 +38,14 @@ async function sanityFetch<QueryResponse>({
 }
 
 // Home and Settings
-export async function getHome(): Promise<GetHomeQueryResult> {
+export async function getHome(): Promise<Home> {
   return sanityFetch({
     query: getHomeQuery,
     tags: ['home'],
   })
 }
 
-export async function getSettings(): Promise<GetSettingsQueryResult> {
+export async function getSettings(): Promise<Settings> {
   return sanityFetch({
     query: getSettingsQuery,
     tags: ['settings'],
@@ -67,16 +53,14 @@ export async function getSettings(): Promise<GetSettingsQueryResult> {
 }
 
 // Projects Queries
-export async function getProjects(): Promise<GetProjectsQueryResult> {
+export async function getProjects(): Promise<Project[]> {
   return sanityFetch({
     query: getProjectsQuery,
     tags: ['project'],
   })
 }
 
-export async function getProjectsByTag(
-  slug: string
-): Promise<GetProjectsByTagQueryResult> {
+export async function getProjectsByTag(slug: string): Promise<Project[]> {
   return sanityFetch({
     query: getProjectsByTagQuery,
     params: { slug },
@@ -84,9 +68,7 @@ export async function getProjectsByTag(
   })
 }
 
-export async function getProjectData(
-  slug: string
-): Promise<GetProjectDataQueryResult> {
+export async function getProjectData(slug: string): Promise<Project> {
   return await sanityFetch({
     query: getProjectDataQuery,
     params: { slug },
@@ -95,16 +77,14 @@ export async function getProjectData(
 }
 
 // Posts Queries
-export async function getPosts(): Promise<GetPostsQueryResult> {
+export async function getPosts(): Promise<Post[]> {
   return sanityFetch({
     query: getPostsQuery,
     tags: ['post'],
   })
 }
 
-export async function getPostsByTag(
-  slug: string
-): Promise<GetPostsByTagQueryResult> {
+export async function getPostsByTag(slug: string): Promise<Post[]> {
   return sanityFetch({
     query: getPostsByTagQuery,
     params: { slug },
@@ -112,9 +92,7 @@ export async function getPostsByTag(
   })
 }
 
-export async function getPostData(
-  slug: string
-): Promise<GetPostDataQueryResult> {
+export async function getPostData(slug: string): Promise<Post> {
   return await sanityFetch({
     query: getPostDataQuery,
     params: { slug: slug },
@@ -123,16 +101,14 @@ export async function getPostData(
 }
 
 // Tags Queries
-export async function getTags(): Promise<GetTagsQueryResult> {
+export async function getTags(): Promise<Tag[]> {
   return sanityFetch({
     query: getTagsQuery,
     tags: ['tag'],
   })
 }
 
-export async function getTagData(
-  slug: string
-): Promise<GetTagDataQueryResult> {
+export async function getTagData(slug: string): Promise<Tag> {
   return await sanityFetch({
     query: getTagDataQuery,
     params: { slug: slug },

@@ -26,7 +26,7 @@ const DynamicSanityIcon = ({
   className,
 }: {
   icon: IconPicker
-  className: string
+  className?: string
 }) => {
   if (!icon) return null
 

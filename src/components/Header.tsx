@@ -12,10 +12,14 @@ import {
 } from '@/components/ui/drawer'
 import { ModeToggle } from '@/components/ThemeToggler'
 import { cn } from '@/lib/utils'
+import { Settings } from '../../sanity.types'
+import DynamicSanityIcon from './DynamicSanityIcon'
 
-const links = ['/projects', '/blog', '/tags', '/contact']
+interface HeaderProps {
+  items?: Settings['urls']
+}
 
-const Header = () => {
+const Header = ({ items }: HeaderProps) => {
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
 
@@ -57,16 +61,21 @@ const Header = () => {
                 </svg>
               </div>
             </Link>
-            {links.map((link) => (
-              <div className="px-1" key={link}>
+            {items?.map((link) => (
+              <div className="px-1" key={link._key}>
                 <Link
-                  href={link}
+                  href={link.url || '/'}
                   className={cn(
                     'flex w-full items-center rounded-lg px-[8px] py-[6px] capitalize transition-all duration-150 ease-in-out hover:bg-secondary md:py-[3px]',
-                    pathname === link && 'bg-secondary'
+                    pathname === link.url && 'bg-secondary'
                   )}
                 >
-                  <span>{link.slice(1)}</span>
+                  {link.icon && (
+                    <div className="flex h-5 w-5 items-center justify-center">
+                      <DynamicSanityIcon icon={link.icon} />
+                    </div>
+                  )}
+                  <span>{link.text}</span>
                 </Link>
               </div>
             ))}
@@ -351,23 +360,45 @@ const Header = () => {
                 <Link
                   href="/"
                   className={cn(
-                    'mt-2 flex w-full items-center rounded-lg px-4 py-2 capitalize transition-all duration-150 ease-in-out hover:bg-secondary',
+                    'my-4 flex w-full items-center rounded-lg p-4 font-extrabold capitalize transition-all duration-150 ease-in-out hover:bg-secondary',
                     pathname === '/' && 'bg-secondary'
                   )}
                 >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="mr-4"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    viewBox="0 0 256 256"
+                  >
+                    <path
+                      d="M152,208V160a8,8,0,0,0-8-8H112a8,8,0,0,0-8,8v48a8,8,0,0,1-8,8H48a8,8,0,0,1-8-8V115.5a8.3,8.3,0,0,1,2.6-5.9l80-72.7a8,8,0,0,1,10.8,0l80,72.7a8.3,8.3,0,0,1,2.6,5.9V208a8,8,0,0,1-8,8H160A8,8,0,0,1,152,208Z"
+                      fill="true"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="16"
+                    />
+                  </svg>
                   <span>Home</span>
                 </Link>
               </DrawerClose>
-              {links.map((link) => (
-                <DrawerClose key={link} asChild>
+              {items?.map((link) => (
+                <DrawerClose key={link._key} asChild>
                   <Link
-                    href={link}
+                    href={link.url || '/'}
                     className={cn(
-                      'mt-2 flex w-full items-center rounded-lg px-4 py-2 capitalize transition-all duration-150 ease-in-out hover:bg-secondary',
-                      pathname === link && 'bg-secondary'
+                      'my-4 flex w-full items-center rounded-lg p-4 font-extrabold capitalize transition-all duration-150 ease-in-out hover:bg-secondary',
+                      pathname === link.url && 'bg-secondary'
                     )}
                   >
-                    <span>{link.slice(1) ? link.slice(1) : 'home'}</span>
+                    {link.icon && (
+                      <div className="mr-4 flex h-5 w-5 items-center justify-center">
+                        <DynamicSanityIcon icon={link.icon} />
+                      </div>
+                    )}
+                    <span>{link.text}</span>
                   </Link>
                 </DrawerClose>
               ))}

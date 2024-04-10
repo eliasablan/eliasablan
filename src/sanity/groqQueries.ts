@@ -10,7 +10,8 @@ export const getHomeQuery = groq`*[_type=='home'][0] {
 }`
 
 export const getSettingsQuery = groq`*[_type=='settings'][0] {
-  ...
+  urls,
+  footer
 }`
 
 // Posts Queries
