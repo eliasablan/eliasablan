@@ -224,4 +224,17 @@ export default defineType({
       of: [defineArrayMember({ type: 'string' })],
     }),
   ],
+  preview: {
+    select: {
+      title: 'name',
+      icon: 'logo',
+    },
+    prepare(selection) {
+      const { title, icon } = selection
+      return {
+        title: title || 'Project',
+        media: icon,
+      }
+    },
+  },
 })

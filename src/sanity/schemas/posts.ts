@@ -44,7 +44,7 @@ export default defineType({
       title: 'Description',
       description:
         'Used both for the <meta> description tag for SEO, and project subheader.',
-      validation: (Rule) => [Rule.required().min(70).max(155)],
+      validation: (Rule) => [Rule.required().min(50).max(155)],
       group: 'content',
     }),
     defineField({
@@ -66,7 +66,7 @@ export default defineType({
       title: 'SEO Title',
       description:
         'Used only for the <meta> title tag for SEO, only if specified.',
-      validation: (Rule) => [Rule.min(50).max(155)],
+      validation: (Rule) => [Rule.min(10).max(60)],
       fieldset: 'seo',
     }),
     defineField({
