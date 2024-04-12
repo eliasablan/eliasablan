@@ -80,14 +80,28 @@ const project = async ({ params }: ProjectProps) => {
               alt={project.dark_logo.alt || 'Project Logo'}
             />
           )}
-          <h1 className="my-4 text-3xl font-extrabold">{project?.name}</h1>
+          <h1 className="my-4 text-center text-3xl font-extrabold">
+            {project?.name}
+          </h1>
           <div className="mx-auto py-3 leading-loose">
-            {project?.tech_tools &&
-              project?.tech_tools.map((tool) => (
-                <Badge key={tool} className="mx-2" variant="outline">
-                  {tool}
-                </Badge>
-              ))}
+            {project.tags && (
+              <div className="flex flex-wrap items-baseline justify-center gap-8 py-6">
+                {project.tags.map((tag) => {
+                  return (
+                    <Link
+                      key={tag?.slug?.current}
+                      href={`/tags/${tag?.slug?.current}`}
+                      className={cn(
+                        badgeVariants({ variant: 'outline' }),
+                        'border-2 hover:border-2 hover:border-dashed hover:border-primary'
+                      )}
+                    >
+                      #{tag?.slug?.current}
+                    </Link>
+                  )
+                })}
+              </div>
+            )}
           </div>
           <div className="mx-auto py-3">
             {project?.urls &&
@@ -116,27 +130,6 @@ const project = async ({ params }: ProjectProps) => {
           value={project?.description || []}
           components={PortableTextComponents}
         />
-
-        <div className="w-full text-sm">
-          {project?.tags && (
-            <div className="flex flex-wrap items-baseline justify-center gap-8 py-6 md:justify-start">
-              {project.tags.map((tag) => {
-                return (
-                  <Link
-                    key={tag?.slug?.current}
-                    href={`/tags/${tag?.slug?.current}`}
-                    className={cn(
-                      badgeVariants({ variant: 'secondary' }),
-                      'border-2 hover:border-2 hover:border-dashed hover:border-primary'
-                    )}
-                  >
-                    #{tag?.slug?.current}
-                  </Link>
-                )
-              })}
-            </div>
-          )}
-        </div>
       </article>
     </main>
   )
