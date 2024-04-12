@@ -3,14 +3,14 @@ import { PortableText } from '@portabletext/react'
 import Link from 'next/link'
 import Image from 'next/image'
 
-import { getProjectData } from '@/sanity/queries'
+import { getProjectData, getProjects } from '@/sanity/queries'
 import { getImageDimensions } from '@sanity/asset-utils'
 import { urlFor } from '@/sanity/utils'
 import { cn } from '@/lib/utils'
 
 import PortableTextComponents from '@/components/PortableTextComponents'
 import DynamicSanityIcon from '@/components/DynamicSanityIcon'
-import { Badge, badgeVariants } from '@/components/ui/badge'
+import { badgeVariants } from '@/components/ui/badge'
 import { buttonVariants } from '@/components/ui/button'
 
 export const generateMetadata = async ({ params }: ProjectProps) => {
@@ -34,6 +34,14 @@ interface ProjectProps {
   params: {
     slug: string
   }
+}
+
+export async function generateStaticParams() {
+  const projects = await getProjects()
+
+  return projects.map((project) => ({
+    slug: project?.slug?.current,
+  }))
 }
 
 const project = async ({ params }: ProjectProps) => {
@@ -85,18 +93,18 @@ const project = async ({ params }: ProjectProps) => {
           </h1>
           <div className="mx-auto py-3 leading-loose">
             {project.tags && (
-              <div className="flex flex-wrap items-baseline justify-center gap-8 py-6">
+              <div className="flex flex-wrap items-baseline justify-center gap-4 py-6">
                 {project.tags.map((tag) => {
                   return (
                     <Link
-                      key={tag?.slug?.current}
-                      href={`/tags/${tag?.slug?.current}`}
+                      key={tag._id}
+                      href={`/tags/${tag.slug?.current}`}
                       className={cn(
                         badgeVariants({ variant: 'outline' }),
                         'border-2 hover:border-2 hover:border-dashed hover:border-primary'
                       )}
                     >
-                      #{tag?.slug?.current}
+                      {tag.name}
                     </Link>
                   )
                 })}

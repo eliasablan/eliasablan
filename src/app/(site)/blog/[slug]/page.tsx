@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { PortableText } from '@portabletext/react'
 import PortableTextComponents from '@/components/PortableTextComponents'
 import { DateJSX } from '@/components/Date'
-import { getPostData } from '@/sanity/queries'
+import { getPostData, getPosts } from '@/sanity/queries'
 import { urlFor } from '@/sanity/utils'
 import { cn } from '@/lib/utils'
 import { badgeVariants } from '@/components/ui/badge'
@@ -29,6 +29,14 @@ export const generateMetadata = async ({ params }: PostProps) => {
       images: [og_image],
     },
   }
+}
+
+export async function generateStaticParams() {
+  const posts = await getPosts()
+
+  return posts.map((post) => ({
+    slug: post?.slug,
+  }))
 }
 
 const blogPost = async ({ params }: PostProps) => {
