@@ -27,9 +27,7 @@ const tag = async ({ params }: TagProps) => {
   return (
     <main className="mx-auto w-full max-w-2xl px-5 pb-12 md:pb-0 md:pt-7">
       <div className="py-8 md:pt-12">
-        <h2 className="text-xl font-medium underline decoration-dashed">
-          Tag: #{params.slug}
-        </h2>
+        <h2 className="text-xl font-medium">#{params.slug}</h2>
         <Projects tag={params.slug} />
         <Blog tag={params.slug} />
       </div>

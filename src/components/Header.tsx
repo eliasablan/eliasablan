@@ -66,7 +66,7 @@ const Header = ({ items }: HeaderProps) => {
             {items?.map((link) => (
               <div className="px-1" key={link._key}>
                 <Link
-                  href={link.url || '/'}
+                  href={`/${link.url!}`}
                   className={cn(
                     'flex w-full items-center rounded-lg px-[8px] py-[6px] capitalize transition-all duration-150 ease-in-out hover:bg-secondary md:py-[3px]',
                     pathname.slice(1) === link.url && 'bg-secondary'
