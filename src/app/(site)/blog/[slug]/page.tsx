@@ -61,14 +61,20 @@ const blogPost = async ({ params }: PostProps) => {
               {post.tags.map((tag) => {
                 return (
                   <Link
+                    // @ts-expect-error
                     key={tag?.slug?.current}
+                    // @ts-expect-error
                     href={`/tags/${tag?.slug?.current}`}
                     className={cn(
                       badgeVariants({ variant: 'secondary' }),
                       'border-2 hover:border-2 hover:border-dashed hover:border-primary'
                     )}
                   >
-                    #{tag?.slug?.current}
+                    #
+                    {
+                      // @ts-expect-error
+                      tag?.slug?.current
+                    }
                   </Link>
                 )
               })}

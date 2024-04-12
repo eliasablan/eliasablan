@@ -97,14 +97,19 @@ const project = async ({ params }: ProjectProps) => {
                 {project.tags.map((tag) => {
                   return (
                     <Link
+                      // @ts-expect-error
                       key={tag._id}
+                      // @ts-expect-error
                       href={`/tags/${tag.slug?.current}`}
                       className={cn(
                         badgeVariants({ variant: 'outline' }),
                         'border-2 hover:border-2 hover:border-dashed hover:border-primary'
                       )}
                     >
-                      {tag.name}
+                      {
+                        // @ts-expect-error
+                        tag.name
+                      }
                     </Link>
                   )
                 })}
