@@ -227,7 +227,6 @@ export type Project = {
     _key: string;
     [internalGroqTypeReferenceTo]?: "tag";
   }>;
-  tech_tools?: Array<string>;
 };
 
 export type Slug = {
@@ -444,7 +443,7 @@ export type GetPostsByTagQueryResult = Array<{
   _createdAt: string;
 }>;
 // Variable: getPostDataQuery
-// Query: *[_type=='post' && slug.current == $slug][0] {    _id,    title,    description,    content,    og_image,    _createdAt,    tags[]->{      name,      slug    }  }
+// Query: *[_type=='post' && slug.current == $slug][0] {    _id,    title,    description,    content,    og_image,    _createdAt,    tags[]->{      _id,      name,      slug    }  }
 export type GetPostDataQueryResult = {
   _id: string;
   title: string | null;
@@ -492,12 +491,13 @@ export type GetPostDataQueryResult = {
   } | null;
   _createdAt: string;
   tags: Array<{
+    _id: string;
     name: string | null;
     slug: Slug | null;
   }> | null;
 } | null;
 // Variable: getProjectsQuery
-// Query: *[_type=='project'] | order(_updatedAt desc)[0..9] {  slug,  status,  name,  short_description,  logo,  dark_logo,  tech_tools,  tags,}
+// Query: *[_type=='project'] | order(_updatedAt desc)[0..9] {  slug,  status,  name,  short_description,  logo,  dark_logo,  tags[]->{    _id,      name,      slug    },}
 export type GetProjectsQueryResult = Array<{
   slug: Slug | null;
   status: "completed" | "deployed" | "development" | null;
@@ -527,17 +527,14 @@ export type GetProjectsQueryResult = Array<{
     alt?: string;
     _type: "image";
   } | null;
-  tech_tools: Array<string> | null;
   tags: Array<{
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: "tag";
+    _id: string;
+    name: string | null;
+    slug: Slug | null;
   }> | null;
 }>;
 // Variable: getProjectsByTagQuery
-// Query: *[_type=='project' && $slug in tags[]->slug.current] {  slug,  status,  name,  short_description,  logo,  dark_logo,  tech_tools,}
+// Query: *[_type=='project' && $slug in tags[]->slug.current] {  slug,  status,  name,  short_description,  logo,  dark_logo,  tags[]->{    _id,      name,      slug    },}
 export type GetProjectsByTagQueryResult = Array<{
   slug: Slug | null;
   status: "completed" | "deployed" | "development" | null;
@@ -567,10 +564,14 @@ export type GetProjectsByTagQueryResult = Array<{
     alt?: string;
     _type: "image";
   } | null;
-  tech_tools: Array<string> | null;
+  tags: Array<{
+    _id: string;
+    name: string | null;
+    slug: Slug | null;
+  }> | null;
 }>;
 // Variable: getProjectDataQuery
-// Query: *[_type=='project' && slug.current == $slug][0] {    _id,    name,    short_description,    description,    logo,    dark_logo,    tech_tools,    urls,    og_image,    tags[]->{      name,      slug    }  }
+// Query: *[_type=='project' && slug.current == $slug][0] {    _id,    name,    short_description,    description,    logo,    dark_logo,    urls,    og_image,    tags[]->{      _id,      name,      slug    }  }
 export type GetProjectDataQueryResult = {
   _id: string;
   name: string | null;
@@ -629,7 +630,6 @@ export type GetProjectDataQueryResult = {
     alt?: string;
     _type: "image";
   } | null;
-  tech_tools: Array<string> | null;
   urls: Array<{
     text?: string;
     url?: string;
@@ -648,6 +648,7 @@ export type GetProjectDataQueryResult = {
     _type: "image";
   } | null;
   tags: Array<{
+    _id: string;
     name: string | null;
     slug: Slug | null;
   }> | null;

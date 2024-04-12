@@ -21,6 +21,7 @@ interface ProjectSquareProps {
 }
 
 const ProjectSquare = ({ project }: ProjectSquareProps) => {
+  console.log({ project })
   return (
     <HoverCard>
       <HoverCardTrigger asChild>
@@ -98,9 +99,9 @@ const ProjectSquare = ({ project }: ProjectSquareProps) => {
               project.status.slice(1)}
         </p>
         <div className="mb-2">
-          {project.tech_tools?.map((tool, index) => (
+          {project.tags?.map((tag, index) => (
             <Badge key={index} variant="secondary" className="mr-0.5">
-              {tool}
+              {tag.name}
             </Badge>
           ))}
         </div>

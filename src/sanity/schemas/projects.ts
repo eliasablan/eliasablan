@@ -217,12 +217,6 @@ export default defineType({
         }),
       ],
     }),
-    defineField({
-      name: 'tech_tools',
-      type: 'array',
-      title: 'Technologies',
-      of: [defineArrayMember({ type: 'string' })],
-    }),
   ],
   preview: {
     select: {

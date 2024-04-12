@@ -37,6 +37,7 @@ export const getPostDataQuery = groq`*[_type=='post' && slug.current == $slug][0
     og_image,
     _createdAt,
     tags[]->{
+      _id,
       name,
       slug
     }
@@ -50,8 +51,11 @@ export const getProjectsQuery = groq`*[_type=='project'] | order(_updatedAt desc
   short_description,
   logo,
   dark_logo,
-  tech_tools,
-  tags,
+  tags[]->{
+    _id,
+      name,
+      slug
+    },
 }`
 
 export const getProjectsByTagQuery = groq`*[_type=='project' && $slug in tags[]->slug.current] {
@@ -61,7 +65,11 @@ export const getProjectsByTagQuery = groq`*[_type=='project' && $slug in tags[]-
   short_description,
   logo,
   dark_logo,
-  tech_tools,
+  tags[]->{
+    _id,
+      name,
+      slug
+    },
 }`
 
 export const getProjectDataQuery = groq`*[_type=='project' && slug.current == $slug][0] {
@@ -71,10 +79,10 @@ export const getProjectDataQuery = groq`*[_type=='project' && slug.current == $s
     description,
     logo,
     dark_logo,
-    tech_tools,
     urls,
     og_image,
     tags[]->{
+      _id,
       name,
       slug
     }
