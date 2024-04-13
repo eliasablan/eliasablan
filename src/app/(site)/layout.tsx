@@ -1,3 +1,4 @@
+import React from 'react'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Toaster } from '@/components/ui/sonner'
@@ -48,7 +49,8 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Header items={settings.urls} />
+          {/* @ts-ignore */}
+          <Header items={settings?.urls} />
           {children}
           <Footer />
           <Toaster richColors expand closeButton />

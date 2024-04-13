@@ -1,3 +1,4 @@
+import React from 'react'
 import Image from 'next/image'
 import { urlFor } from '@/sanity/utils'
 import { getImageDimensions } from '@sanity/asset-utils'

@@ -5,6 +5,7 @@ import { Link } from 'sanity/router'
 interface Props {
   context: string
   renderDefault: (
+    // eslint-disable-next-line no-unused-vars
     arg0: any
   ) =>
     | string
