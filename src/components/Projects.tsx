@@ -20,6 +20,7 @@ const Projects = async ({ tag = null }: ProjectsProps) => {
       <div className="mt-4 grid grid-cols-2 gap-4 md:grid-cols-3">
         {projects && projects.length > 0 ? (
           projects.map((project) => (
+            // @ts-ignore
             <ProjectSquare key={project.slug?.current} project={project} />
           ))
         ) : (
