@@ -23,8 +23,6 @@ const Header = ({ items }: HeaderProps) => {
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
 
-  console.log({ pathname, items })
-
   return (
     <motion.div
       initial={{ y: -100, opacity: 0 }}
@@ -323,15 +321,11 @@ const Header = ({ items }: HeaderProps) => {
       >
         <Drawer open={open} onOpenChange={setOpen} nested>
           <DrawerTrigger
-            className="m-5 w-full"
+            className="m-5"
             onClick={() => setOpen(true)}
             asChild
           >
-            <Button
-              size="lg"
-              className="w-full border-2 py-5"
-              variant="secondary"
-            >
+            <Button size="lg" variant="secondary">
               <div className="flex h-auto items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -383,13 +377,13 @@ const Header = ({ items }: HeaderProps) => {
                       strokeWidth="16"
                     />
                   </svg>
-                  <span>Home</span>
+                  <span className="font-semibold">Home</span>
                 </Link>
               </DrawerClose>
               {items?.map((link) => (
                 <DrawerClose key={link._key} asChild>
                   <Link
-                    href={link.url || '/'}
+                    href={`/${link.url!}`}
                     className={cn(
                       'my-4 flex w-full items-center rounded-lg p-4 capitalize transition-all duration-150 ease-in-out hover:bg-secondary',
                       pathname.slice(1) === link.url && 'bg-secondary'
@@ -400,7 +394,7 @@ const Header = ({ items }: HeaderProps) => {
                         <DynamicSanityIcon icon={link.icon} />
                       </div>
                     )}
-                    <span>{link.text}</span>
+                    <span className="font-semibold">{link.text}</span>
                   </Link>
                 </DrawerClose>
               ))}

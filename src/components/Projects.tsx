@@ -2,7 +2,7 @@ import { Project } from '../../sanity.types'
 import ProjectSquare from './ProjectSquare'
 import { getProjects, getProjectsByTag } from '@/sanity/queries'
 
-interface ProjectsProps {
+interface ProjectsProps extends Project {
   tag?: string | null
 }
 
@@ -20,10 +20,7 @@ const Projects = async ({ tag = null }: ProjectsProps) => {
       <div className="mt-4 grid grid-cols-2 gap-4 md:grid-cols-3">
         {projects && projects.length > 0 ? (
           projects.map((project) => (
-            <ProjectSquare
-              key={project.slug?.current}
-              project={project as Project}
-            />
+            <ProjectSquare key={project.slug?.current} project={project} />
           ))
         ) : (
           <h1>No projects right now</h1>

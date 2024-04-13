@@ -14,14 +14,7 @@ import {
 import { urlFor } from '@/sanity/utils'
 import { getImageDimensions } from '@sanity/asset-utils'
 
-import { Project } from '../../sanity.types'
-
-interface ProjectSquareProps {
-  project: Project
-}
-
-const ProjectSquare = ({ project }: ProjectSquareProps) => {
-  console.log({ project })
+const ProjectSquare = ({ project }) => {
   return (
     <HoverCard>
       <HoverCardTrigger asChild>
@@ -99,8 +92,8 @@ const ProjectSquare = ({ project }: ProjectSquareProps) => {
               project.status.slice(1)}
         </p>
         <div className="mb-2">
-          {project.tags?.map((tag, index) => (
-            <Badge key={index} variant="secondary" className="mr-0.5">
+          {project.tags?.map((tag) => (
+            <Badge key={tag._id} variant="secondary" className="mr-0.5">
               {tag.name}
             </Badge>
           ))}

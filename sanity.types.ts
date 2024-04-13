@@ -443,7 +443,7 @@ export type GetPostsByTagQueryResult = Array<{
   _createdAt: string;
 }>;
 // Variable: getPostDataQuery
-// Query: *[_type=='post' && slug.current == $slug][0] {    _id,    title,    description,    content,    og_image,    _createdAt,    tags[]->{      _id,      name,      slug    }  }
+// Query: *[_type=='post' && slug.current == $slug][0] {  _id,  title,  description,  content,  og_image,  _createdAt,  tags[]->{    _id,    name,    slug  }  }
 export type GetPostDataQueryResult = {
   _id: string;
   title: string | null;
@@ -497,7 +497,7 @@ export type GetPostDataQueryResult = {
   }> | null;
 } | null;
 // Variable: getProjectsQuery
-// Query: *[_type=='project'] | order(_updatedAt desc)[0..9] {  slug,  status,  name,  short_description,  logo,  dark_logo,  tags[]->{    _id,      name,      slug    },}
+// Query: *[_type=='project'] | order(_updatedAt desc)[0..9] {  slug,  status,  name,  short_description,  logo,  dark_logo,  tags[]->{    _id,    name,    slug  },}
 export type GetProjectsQueryResult = Array<{
   slug: Slug | null;
   status: "completed" | "deployed" | "development" | null;
@@ -534,7 +534,7 @@ export type GetProjectsQueryResult = Array<{
   }> | null;
 }>;
 // Variable: getProjectsByTagQuery
-// Query: *[_type=='project' && $slug in tags[]->slug.current] {  slug,  status,  name,  short_description,  logo,  dark_logo,  tags[]->{    _id,      name,      slug    },}
+// Query: *[_type=='project' && $slug in tags[]->slug.current] {  slug,  status,  name,  short_description,  logo,  dark_logo,  tags[]->{    _id,    name,    slug  },}
 export type GetProjectsByTagQueryResult = Array<{
   slug: Slug | null;
   status: "completed" | "deployed" | "development" | null;
@@ -571,7 +571,7 @@ export type GetProjectsByTagQueryResult = Array<{
   }> | null;
 }>;
 // Variable: getProjectDataQuery
-// Query: *[_type=='project' && slug.current == $slug][0] {    _id,    name,    short_description,    description,    logo,    dark_logo,    urls,    og_image,    tags[]->{      _id,      name,      slug    }  }
+// Query: *[_type=='project' && slug.current == $slug][0] {  _id,  name,  short_description,  description,  logo,  dark_logo,  urls,  og_image,  tags[]->{    _id,    name,    slug  }  }
 export type GetProjectDataQueryResult = {
   _id: string;
   name: string | null;
@@ -654,13 +654,13 @@ export type GetProjectDataQueryResult = {
   }> | null;
 } | null;
 // Variable: getTagsQuery
-// Query: *[_type=='tag'] | order(_updatedAt desc)[0..9] {    slug,    name,  }
+// Query: *[_type=='tag'] | order(_updatedAt desc)[0..9] {  slug,  name,  }
 export type GetTagsQueryResult = Array<{
   slug: Slug | null;
   name: string | null;
 }>;
 // Variable: getTagDataQuery
-// Query: *[_type=='tag' && slug.current == $slug][0] {    name,    slug  }
+// Query: *[_type=='tag' && slug.current == $slug][0] {  name,  slug  }
 export type GetTagDataQueryResult = {
   name: string | null;
   slug: Slug | null;
