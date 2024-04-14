@@ -2,12 +2,10 @@ import Link from 'next/link'
 import React from 'react'
 import { DateJSX } from './Date'
 
+import { Post } from '../../sanity.types'
+
 interface PostItemProps {
-  post: {
-    title: string | null
-    slug: string | null
-    _createdAt: string
-  }
+  post: Post
 }
 
 const PostItem = ({ post }: PostItemProps) => {
