@@ -1,4 +1,4 @@
-import { CogIcon } from '@sanity/icons'
+import { CogIcon, InfoFilledIcon } from '@sanity/icons'
 import { defineArrayMember, defineField, defineType } from 'sanity'
 import { preview } from 'sanity-plugin-icon-picker'
 
@@ -62,7 +62,7 @@ export default defineType({
               return {
                 title: title,
                 subtitle: subtitle,
-                media: preview(icon),
+                media: icon ? preview(icon) : InfoFilledIcon,
               }
             },
           },
