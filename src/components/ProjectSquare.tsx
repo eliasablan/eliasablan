@@ -14,7 +14,18 @@ import {
 import { urlFor } from '@/sanity/utils'
 import { getImageDimensions } from '@sanity/asset-utils'
 
-const ProjectSquare = ({ project }) => {
+import { Project } from '../../sanity.types'
+
+interface ProjectSquareProps {
+  project: Project & {
+    _type: any
+    _createdAt: any
+    _updatedAt: any
+    _rev: any
+  }
+}
+
+const ProjectSquare = ({ project }: ProjectSquareProps) => {
   return (
     <HoverCard>
       <HoverCardTrigger asChild>
