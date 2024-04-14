@@ -1,6 +1,6 @@
-import { groq } from 'next-sanity'
+import groq from 'groq'
 
-// Home and Settings Queries
+// #region Home and Settings
 export const getHomeQuery = groq`*[_type=='home'][0] {
   _id,
   title,
@@ -13,8 +13,9 @@ export const getSettingsQuery = groq`*[_type=='settings'][0] {
   urls,
   footer
 }`
+// #endregion
 
-// Posts Queries
+// #region Posts
 export const getPostsQuery = groq`*[_type=='post'] | order(_createdAt desc)[0..9] {
   _id,
   title,
@@ -41,24 +42,12 @@ export const getPostDataQuery = groq`*[_type=='post' && slug.current == $slug][0
     name,
     slug
   }
-  }`
-
-// Projects Queries
-export const getProjectsQuery = groq`*[_type=='project'] | order(_updatedAt desc)[0..9] {
-  slug,
-  status,
-  name,
-  short_description,
-  logo,
-  dark_logo,
-  tags[]->{
-    _id,
-    name,
-    slug
-  },
 }`
+// #endregion
 
-export const getProjectsByTagQuery = groq`*[_type=='project' && $slug in tags[]->slug.current] {
+// #region Projects
+export const getProjectsQuery = groq`*[_type=='project' && ($slug == '' || $slug in tags[]->slug.current)] | order(_updatedAt desc)[0..9]{
+  _id,
   slug,
   status,
   name,
@@ -86,15 +75,17 @@ export const getProjectDataQuery = groq`*[_type=='project' && slug.current == $s
     name,
     slug
   }
-  }`
+}`
+// #endregion
 
-// Tags Queries
+// #region Tags
 export const getTagsQuery = groq`*[_type=='tag'] | order(_updatedAt desc)[0..9] {
   slug,
   name,
-  }`
+}`
 
 export const getTagDataQuery = groq`*[_type=='tag' && slug.current == $slug][0] {
   name,
   slug
-  }`
+}`
+// #endregion

@@ -1,4 +1,5 @@
 'use server'
+// #region Imports
 import { client } from './utils'
 import { QueryParams } from 'next-sanity'
 import {
@@ -7,7 +8,6 @@ import {
   getSettingsQuery,
   // Projects
   getProjectsQuery,
-  getProjectsByTagQuery,
   getProjectDataQuery,
   // Posts
   getPostsQuery,
@@ -22,13 +22,13 @@ import {
   GetSettingsQueryResult,
   GetProjectsQueryResult,
   GetProjectDataQueryResult,
-  GetProjectsByTagQueryResult,
   GetPostsQueryResult,
   GetPostDataQueryResult,
   GetPostsByTagQueryResult,
   GetTagsQueryResult,
   GetTagDataQueryResult,
 } from '../../sanity.types'
+// #endregion
 
 async function sanityFetch<QueryResponse>({
   query,
@@ -48,7 +48,7 @@ async function sanityFetch<QueryResponse>({
   })
 }
 
-// Home and Settings
+// #region Home and Settings
 export async function getHome(): Promise<GetHomeQueryResult> {
   return sanityFetch({
     query: getHomeQuery,
@@ -62,22 +62,19 @@ export async function getSettings(): Promise<GetSettingsQueryResult> {
     tags: ['settings'],
   })
 }
+// #endregion
 
-// Projects Queries
-export async function getProjects(): Promise<GetProjectsQueryResult> {
+// #region Projects
+
+export async function getProjects(
+  slug?: string
+): Promise<GetProjectsQueryResult> {
+  const params = slug ? { slug } : { slug: '' }
+  const tags = slug ? ['project', 'tag'] : ['project']
   return sanityFetch({
     query: getProjectsQuery,
-    tags: ['project'],
-  })
-}
-
-export async function getProjectsByTag(
-  slug: string
-): Promise<GetProjectsByTagQueryResult[]> {
-  return sanityFetch({
-    query: getProjectsByTagQuery,
-    params: { slug },
-    tags: ['project', 'tag'],
+    params,
+    tags,
   })
 }
 
@@ -90,9 +87,10 @@ export async function getProjectData(
     tags: [`project:${slug}`],
   })
 }
+// #endregion
 
-// Posts Queries
-export async function getPosts(): Promise<GetPostsQueryResult[]> {
+// #region Posts
+export async function getPosts(): Promise<GetPostsQueryResult> {
   return sanityFetch({
     query: getPostsQuery,
     tags: ['post'],
@@ -101,7 +99,7 @@ export async function getPosts(): Promise<GetPostsQueryResult[]> {
 
 export async function getPostsByTag(
   slug: string
-): Promise<GetPostsByTagQueryResult[]> {
+): Promise<GetPostsByTagQueryResult> {
   return sanityFetch({
     query: getPostsByTagQuery,
     params: { slug },
@@ -118,9 +116,10 @@ export async function getPostData(
     tags: [`post:${slug}`],
   })
 }
+// #endregion
 
-// Tags Queries
-export async function getTags(): Promise<GetTagsQueryResult[]> {
+// #region Tags
+export async function getTags(): Promise<GetTagsQueryResult> {
   return sanityFetch({
     query: getTagsQuery,
     tags: ['tag'],
@@ -136,3 +135,4 @@ export async function getTagData(
     tags: [`tag:${slug}`],
   })
 }
+// #endregion
