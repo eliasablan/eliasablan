@@ -14,15 +14,8 @@ import {
 import { urlFor } from '@/sanity/utils'
 import { getImageDimensions } from '@sanity/asset-utils'
 
-import { Project } from '../../sanity.types'
-
 interface ProjectSquareProps {
-  project: Project & {
-    _type: any
-    _createdAt: any
-    _updatedAt: any
-    _rev: any
-  }
+  project: any
 }
 
 const ProjectSquare = ({ project }: ProjectSquareProps) => {
@@ -103,7 +96,7 @@ const ProjectSquare = ({ project }: ProjectSquareProps) => {
               project.status.slice(1)}
         </p>
         <div className="mb-2">
-          {project.tags?.map((tag) => (
+          {project.tags?.map((tag: any) => (
             <Badge key={tag._id} variant="secondary" className="mr-0.5">
               {tag.name}
             </Badge>

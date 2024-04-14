@@ -1,4 +1,3 @@
-import { GetProjectsQueryResult } from '../../sanity.types'
 import ProjectSquare from './ProjectSquare'
 import { getProjects } from '@/sanity/queries'
 
@@ -14,7 +13,7 @@ const Projects = async ({ tag }: ProjectsProps) => {
       <h2 className="text-xl font-medium">Projects</h2>
       <div className="mt-4 grid grid-cols-2 gap-4 md:grid-cols-3">
         {projects && projects.length > 0 ? (
-          projects.map((project: GetProjectsQueryResult) => {
+          projects.map((project) => {
             console.log({ project })
             return <ProjectSquare key={project._id} project={project} />
           })

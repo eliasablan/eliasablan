@@ -2,10 +2,8 @@ import Link from 'next/link'
 import React from 'react'
 import { DateJSX } from './Date'
 
-import { Post } from '../../sanity.types'
-
 interface PostItemProps {
-  post: Post
+  post: any
 }
 
 const PostItem = ({ post }: PostItemProps) => {
