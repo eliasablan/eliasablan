@@ -92,24 +92,19 @@ const project = async ({ params }: ProjectProps) => {
             {project?.name}
           </h1>
           <div className="mx-auto py-3 leading-loose">
-            {project.tags && (
+            {project?.tags && (
               <div className="flex flex-wrap items-baseline justify-center gap-4 py-6">
                 {project.tags.map((tag) => {
                   return (
                     <Link
-                      // @ts-expect-error
                       key={tag._id}
-                      // @ts-expect-error
                       href={`/tags/${tag.slug?.current}`}
                       className={cn(
                         badgeVariants({ variant: 'outline' }),
                         'border-2 hover:border-2 hover:border-dashed hover:border-primary'
                       )}
                     >
-                      {
-                        // @ts-expect-error
-                        tag.name
-                      }
+                      {tag.name}
                     </Link>
                   )
                 })}

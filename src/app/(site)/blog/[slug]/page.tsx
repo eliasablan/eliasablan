@@ -35,7 +35,6 @@ export async function generateStaticParams() {
   const posts = await getPosts()
 
   return posts.map((post) => ({
-    // @ts-expect-error
     slug: post?.slug,
   }))
 }
