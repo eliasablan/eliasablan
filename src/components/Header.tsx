@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -14,14 +14,22 @@ import { ModeToggle } from '@/components/ThemeToggler'
 import { cn } from '@/lib/utils'
 import { Settings } from '../../sanity.types'
 import DynamicSanityIcon from './DynamicSanityIcon'
+import { getSettings } from '@/sanity/queries'
 
-interface HeaderProps {
-  items?: Settings['urls']
-}
+// interface HeaderProps {
+//   items?: Settings['urls']
+// }
 
-const Header = ({ items }: HeaderProps) => {
+const Header = () => {
+  const [items, setItems] = useState<Settings['urls']>([])
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    getSettings().then((result) => {
+      setItems(result?.urls || [])
+    })
+  }, [])
 
   return (
     <motion.div

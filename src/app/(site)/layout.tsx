@@ -13,7 +13,6 @@ import '../globals.css'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
-import { getSettings } from '@/sanity/queries'
 
 export const metadata: Metadata = {
   title: {
@@ -25,12 +24,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(`https://${process.env.VERCEL_URL}/`),
 }
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const settings = await getSettings()
   return (
     <html lang="en">
       <body
@@ -49,8 +47,7 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {/* @ts-ignore */}
-          <Header items={settings?.urls} />
+          <Header />
           {children}
           <Footer />
           <Toaster richColors expand closeButton />
