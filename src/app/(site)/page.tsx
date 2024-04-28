@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import Presentation from '@/components/Presentation'
 import Projects from '@/components/Projects'
 import Blog from '@/components/Blog'
@@ -27,10 +28,18 @@ export default function Home() {
     <main className="relative m-auto max-w-2xl">
       <div className="grid md:grid-cols-1">
         <div className="divide-y px-5 pb-12 md:pb-0">
-          <Presentation />
-          <Projects />
-          <Blog />
-          <Tags />
+          <Suspense fallback={null}>
+            <Presentation />
+          </Suspense>
+          <Suspense fallback={null}>
+            <Projects />
+          </Suspense>
+          <Suspense fallback={null}>
+            <Blog />
+          </Suspense>
+          <Suspense fallback={null}>
+            <Tags />
+          </Suspense>
         </div>
       </div>
     </main>
