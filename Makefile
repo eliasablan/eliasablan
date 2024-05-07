@@ -1,14 +1,14 @@
 up:
-	docker-compose up -d
+	docker compose up -d
 
 down:
-	docker-compose down
+	docker compose down
 
 build:
-	docker-compose build
+	docker compose build
 
 run:
-	docker-compose run app
+	docker compose run app
 
 dev:
-	docker-compose run app npm run dev
+	dockercompose run app npm run dev
