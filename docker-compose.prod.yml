@@ -7,18 +7,12 @@ services:
       context: ./next-app
       dockerfile: prod.Dockerfile
       args:
-        ENV_VARIABLE: ${ENV_VARIABLE}
-        NEXT_PUBLIC_ENV_VARIABLE: ${NEXT_PUBLIC_ENV_VARIABLE}
+        RESEND_API_KEY: ${RESEND_API_KEY}
+        VERCEL_URL: ${VERCEL_URL}
+        NEXT_PUBLIC_SANITY_PROJECT_ID: ${NEXT_PUBLIC_SANITY_PROJECT_ID}
+        NEXT_PUBLIC_SANITY_DATASET: ${NEXT_PUBLIC_SANITY_DATASET}
+        SANITY_REVALIDATE_SECRET: ${SANITY_REVALIDATE_SECRET}
+
     restart: always
     ports:
-      - 3000:3000
-    networks:
-      - my_network
-
-  # Add more containers below (nginx, postgres, etc.)
-
-# Define a network, which allows containers to communicate
-# with each other, by using their container name as a hostname
-networks:
-  my_network:
-    external: true
+      - 5001:3000
