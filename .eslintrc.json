@@ -2,8 +2,8 @@
   "extends": [
     "eslint:recommended",
     "next",
-    "prettier",
-    "@sanity/eslint-config-studio"
+    "prettier"
+    // "@sanity/eslint-config-studio"
   ],
   "rules": {
     "react-hooks/exhaustive-deps": "off"
