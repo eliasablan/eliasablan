@@ -1,13 +1,23 @@
-version: '3.9'
-
 services:
-  app:
+  dev:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: 'eliasablan'
+    container_name: 'eliasablan.dev'
     ports:
-      - '5002:3000'
+      - '3000:3000'
     volumes:
       - .:/app
       - /app/node_modules
+    env_file:
+      - .env.local
+  prod:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    container_name: 'eliasablan'
+    ports:
+      - '5001:3000'
+    env_file:
+      - .env
+      - .env.local
