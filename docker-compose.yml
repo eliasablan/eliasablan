@@ -6,13 +6,14 @@ services:
       target: development # Use the 'development' stage from the Dockerfile
     container_name: 'eliasablan.dev'
     ports:
-      - '3000:3000'
+      - '3001:3000'
     volumes:
       - .:/app
       - /app/node_modules
     env_file:
       - .env.local
   prod:
+    platform: 'linux/amd64'
     build:
       context: .
       dockerfile: Dockerfile
