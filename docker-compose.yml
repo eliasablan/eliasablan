@@ -3,6 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      target: development # Use the 'development' stage from the Dockerfile
     container_name: 'eliasablan.dev'
     ports:
       - '3000:3000'
@@ -14,7 +15,8 @@ services:
   prod:
     build:
       context: .
-      dockerfile: Dockerfile.prod
+      dockerfile: Dockerfile
+      target: production # Use the 'production' stage from the Dockerfile
     container_name: 'eliasablan'
     ports:
       - '5001:3000'
