@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: Dockerfile.dev
     container_name: 'eliasablan.dev'
-    image: 'ghcr.io/eliasablan/eliasablan.com:dev'
+    image: 'ghcr.io/eliasablan/eliasablan.dev:latest'
     ports:
       - '3001:3000'
     volumes:
@@ -19,7 +19,7 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: 'eliasablan'
-    image: 'ghcr.io/eliasablan/eliasablan.com:prod'
+    image: 'ghcr.io/eliasablan/eliasablan.prod:latest'
     ports:
       - '5001:3000'
     env_file:
