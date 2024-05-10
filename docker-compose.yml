@@ -2,23 +2,26 @@ services:
   dev:
     build:
       context: .
-      dockerfile: Dockerfile
-      target: development # Use the 'development' stage from the Dockerfile
+      dockerfile: Dockerfile.dev
+      # target: development # Use the 'development' stage from the Dockerfile
     container_name: 'eliasablan.dev'
+    image: 'ghcr.io/eliasablan/eliasablan.com:dev'
     ports:
       - '3001:3000'
     volumes:
       - .:/app
       - /app/node_modules
     env_file:
+      - .env
       - .env.local
   prod:
     platform: 'linux/amd64'
     build:
       context: .
       dockerfile: Dockerfile
-      target: production # Use the 'production' stage from the Dockerfile
+      # target: production # Use the 'production' stage from the Dockerfile
     container_name: 'eliasablan'
+    image: 'ghcr.io/eliasablan/eliasablan.com:prod'
     ports:
       - '5001:3000'
     env_file:
