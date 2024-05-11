@@ -7,9 +7,11 @@ services:
     image: 'ghcr.io/eliasablan/eliasablan.dev:latest'
     ports:
       - '3001:3000'
+    restart: always
     volumes:
-      - .:/app
-      - /app/node_modules
+      - ./src:/app/src
+      - ./public:/app/public
+      - ./node_modules:/app/node_modules
     env_file:
       - .env
       - .env.local
@@ -22,6 +24,7 @@ services:
     image: 'ghcr.io/eliasablan/eliasablan.prod:latest'
     ports:
       - '5001:3000'
+    restart: always
     env_file:
       - .env
       - .env.local
