@@ -38,7 +38,7 @@ export default function RootLayout({
           GeistSans.variable,
           GeistMono.variable,
           // scrollbar
-          'scrollbar-thin scrollbar-thumb-accent'
+          'scrollbar scrollbar-thumb-accent'
         )}
       >
         <ThemeProvider
