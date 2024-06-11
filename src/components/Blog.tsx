@@ -1,11 +1,13 @@
 import PostItem from './PostItem'
 import { getPosts, getPostsByTag } from '@/sanity/queries'
+import { Locale } from '../../i18n-config'
 
 interface PostsProps {
   tag?: string | null
+  lang: Locale
 }
 
-const Blog = async ({ tag = null }: PostsProps) => {
+const Blog = async ({ tag = null, lang }: PostsProps) => {
   let posts = null
   if (tag) {
     posts = await getPostsByTag(tag)
@@ -20,7 +22,9 @@ const Blog = async ({ tag = null }: PostsProps) => {
       </div>
       <div className="w-full text-sm">
         {posts && posts.length > 0 ? (
-          posts.map((post) => <PostItem key={post._id} post={post} />)
+          posts.map((post) => (
+            <PostItem key={post._id} post={post} lang={lang} />
+          ))
         ) : (
           <h1>No posts right now</h1>
         )}

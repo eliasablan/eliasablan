@@ -16,8 +16,11 @@ import {
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { toast } from 'sonner'
+import { Locale } from '../../i18n-config'
 
-const ContactForm = () => {
+const ContactForm = ({ lang }: { lang: Locale }) => {
+  console.log({ lang })
+
   // 1. Define your form.
   const form = useForm({
     resolver: zodResolver(FormSchema),

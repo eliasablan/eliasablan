@@ -8,11 +8,16 @@ import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
 
 import { cn } from '@/lib/utils'
-import '../globals.css'
+import './globals.css'
 
 import { ThemeProvider } from '@/components/ThemeProvider'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import { i18n, type Locale } from '../../../i18n-config'
+
+export async function generateStaticParams() {
+  return i18n.locales.map((locale) => ({ lang: locale }))
+}
 
 export const metadata: Metadata = {
   title: {
@@ -26,11 +31,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode
+  params: { lang: Locale }
 }>) {
   return (
-    <html lang="en">
+    <html lang={params.lang}>
       <body
         className={cn(
           // font
@@ -47,7 +54,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Header />
+          <Header lang={params.lang} />
           {children}
           <Footer />
           <Toaster richColors expand closeButton />

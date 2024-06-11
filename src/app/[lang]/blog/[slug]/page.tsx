@@ -7,9 +7,11 @@ import { getPostData, getPosts } from '@/sanity/queries'
 import { urlFor } from '@/sanity/utils'
 import { cn } from '@/lib/utils'
 import { badgeVariants } from '@/components/ui/badge'
+import { Locale } from '../../../../../i18n-config'
 
 interface PostProps {
   params: {
+    lang: Locale
     slug: string
   }
 }
@@ -40,7 +42,8 @@ export async function generateStaticParams() {
 }
 
 const blogPost = async ({ params }: PostProps) => {
-  const post = await getPostData(params.slug)
+  const { lang, slug } = params
+  const post = await getPostData(slug)
 
   return (
     <main className="relative mx-auto w-full max-w-2xl">
@@ -62,7 +65,7 @@ const blogPost = async ({ params }: PostProps) => {
                 return (
                   <Link
                     key={tag?.slug?.current}
-                    href={`/tags/${tag?.slug?.current}`}
+                    href={`/${lang}/tags/${tag?.slug?.current}`}
                     className={cn(
                       badgeVariants({ variant: 'secondary' }),
                       'border-2 hover:border-2 hover:border-dashed hover:border-primary'

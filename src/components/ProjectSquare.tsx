@@ -13,16 +13,18 @@ import {
 
 import { urlFor } from '@/sanity/utils'
 import { getImageDimensions } from '@sanity/asset-utils'
+import { Locale } from '../../i18n-config'
 
 interface ProjectSquareProps {
+  lang: Locale
   project: any
 }
 
-const ProjectSquare = ({ project }: ProjectSquareProps) => {
+const ProjectSquare = ({ lang, project }: ProjectSquareProps) => {
   return (
     <HoverCard>
       <HoverCardTrigger asChild>
-        <Link href={`/projects/${project.slug?.current}`}>
+        <Link href={`/${lang}/projects/${project.slug?.current}`}>
           <Card
             className={cn(
               'bg-radius flex min-w-[120px] flex-col rounded-lg border px-4 py-2 hover:bg-accent'

@@ -3,6 +3,7 @@ import Blog from '@/components/Blog'
 
 import { getTagData, getTags } from '@/sanity/queries'
 import Projects from '@/components/Projects'
+import { Locale } from '../../../../../i18n-config'
 
 export const generateMetadata = async ({ params }: TagProps) => {
   const tag = await getTagData(params.slug)
@@ -20,6 +21,7 @@ export const generateMetadata = async ({ params }: TagProps) => {
 interface TagProps {
   params: {
     slug: string
+    lang: Locale
   }
 }
 
@@ -32,13 +34,14 @@ export async function generateStaticParams() {
 }
 
 const tag = async ({ params }: TagProps) => {
-  const tag = await getTagData(params.slug)
+  const { lang, slug } = params
+  const tag = await getTagData(slug)
   return (
     <main className="mx-auto w-full max-w-2xl px-5 pb-12 md:pb-0 md:pt-7">
       <div className="py-8 md:pt-12">
         <h2 className="text-xl font-medium"># {tag?.name}</h2>
-        <Projects tag={params.slug} />
-        <Blog tag={params.slug} />
+        <Projects lang={lang} tag={slug} />
+        <Blog lang={lang} tag={slug} />
       </div>
     </main>
   )

@@ -1,8 +1,14 @@
 import Link from 'next/link'
 import { buttonVariants } from '@/components/ui/button'
 import Header from '@/components/Header'
+import { Locale } from '../../../i18n-config'
 
-export default function NotFound() {
+export default function NotFound({
+  params,
+}: {
+  params: { lang: Locale }
+}) {
+  console.log({ params })
   return (
     <>
       <Header />

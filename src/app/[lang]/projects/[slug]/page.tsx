@@ -12,6 +12,7 @@ import PortableTextComponents from '@/components/PortableTextComponents'
 import DynamicSanityIcon from '@/components/DynamicSanityIcon'
 import { badgeVariants } from '@/components/ui/badge'
 import { buttonVariants } from '@/components/ui/button'
+import { Locale } from '../../../../../i18n-config'
 
 export const generateMetadata = async ({ params }: ProjectProps) => {
   const project = await getProjectData(params.slug)
@@ -32,6 +33,7 @@ export const generateMetadata = async ({ params }: ProjectProps) => {
 
 interface ProjectProps {
   params: {
+    lang: Locale
     slug: string
   }
 }
@@ -45,7 +47,8 @@ export async function generateStaticParams() {
 }
 
 const project = async ({ params }: ProjectProps) => {
-  const project = await getProjectData(params.slug)
+  const { slug, lang } = params
+  const project = await getProjectData(slug)
 
   return (
     <main className="relative mx-auto w-full max-w-2xl">
@@ -98,7 +101,7 @@ const project = async ({ params }: ProjectProps) => {
                   return (
                     <Link
                       key={tag._id}
-                      href={`/tags/${tag.slug?.current}`}
+                      href={`/${lang}/tags/${tag.slug?.current}`}
                       className={cn(
                         badgeVariants({ variant: 'outline' }),
                         'border-2 hover:border-2 hover:border-dashed hover:border-primary'

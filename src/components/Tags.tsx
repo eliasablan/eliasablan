@@ -2,8 +2,9 @@ import { getTags } from '@/sanity/queries'
 import Link from 'next/link'
 import { badgeVariants } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
+import { Locale } from '../../i18n-config'
 
-const Tags = async () => {
+const Tags = async ({ lang }: { lang: Locale }) => {
   const tags = await getTags()
 
   return (
@@ -17,7 +18,7 @@ const Tags = async () => {
             {tags.map((tag) => (
               <Link
                 key={tag?.slug?.current}
-                href={`/tags/${tag?.slug?.current}`}
+                href={`/${lang}/tags/${tag?.slug?.current}`}
                 className={cn(
                   badgeVariants({ variant: 'secondary' }),
                   'border-2 hover:border-2 hover:border-dashed hover:border-primary'

@@ -7,6 +7,7 @@ import type { Metadata } from 'next'
 
 import { getHome } from '@/sanity/queries'
 import { urlFor } from '@/sanity/utils'
+import { Locale } from '../../../i18n-config'
 
 export async function generateMetadata() {
   const data = await getHome()
@@ -23,22 +24,28 @@ export async function generateMetadata() {
   return metadata
 }
 
-export default function Home() {
+export default function Home({
+  params: { lang },
+}: {
+  params: { lang: Locale }
+}) {
+  console.log({ lang })
+
   return (
     <main className="relative m-auto max-w-2xl">
       <div className="grid md:grid-cols-1">
         <div className="divide-y px-5 pb-12 md:pb-0">
           <Suspense fallback={null}>
-            <Presentation />
+            <Presentation lang={lang} />
           </Suspense>
           <Suspense fallback={null}>
-            <Projects />
+            <Projects lang={lang} />
           </Suspense>
           <Suspense fallback={null}>
-            <Blog />
+            <Blog lang={lang} />
           </Suspense>
           <Suspense fallback={null}>
-            <Tags />
+            <Tags lang={lang} />
           </Suspense>
         </div>
       </div>
