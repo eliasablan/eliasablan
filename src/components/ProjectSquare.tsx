@@ -13,7 +13,7 @@ import {
 
 import { urlFor } from '@/sanity/utils'
 import { getImageDimensions } from '@sanity/asset-utils'
-import { Locale } from '../../i18n-config'
+import { Locale } from '../lib/i18n-config'
 
 interface ProjectSquareProps {
   lang: Locale

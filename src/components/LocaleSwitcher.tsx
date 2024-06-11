@@ -4,7 +4,7 @@ import React from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-import { i18n } from '../../i18n-config'
+import { i18n } from '../lib/i18n-config'
 
 import {
   NavigationMenu,

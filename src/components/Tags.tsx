@@ -2,7 +2,7 @@ import { getTags } from '@/sanity/queries'
 import Link from 'next/link'
 import { badgeVariants } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
-import { Locale } from '../../i18n-config'
+import { Locale } from '../lib/i18n-config'
 
 const Tags = async ({ lang }: { lang: Locale }) => {
   const tags = await getTags()

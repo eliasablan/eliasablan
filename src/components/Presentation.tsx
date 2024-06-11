@@ -2,7 +2,7 @@ import React from 'react'
 import { PortableText } from '@portabletext/react'
 import { HomePortableTextComponents } from '@/components/PortableTextComponents'
 import { getHome } from '@/sanity/queries'
-import { Locale } from '../../i18n-config'
+import { Locale } from '../lib/i18n-config'
 
 const Presentation = async ({ lang }: { lang: Locale }) => {
   console.log({ lang })

@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 import { DateJSX } from './Date'
-import { Locale } from '../../i18n-config'
+import { Locale } from '../lib/i18n-config'
 
 interface PostItemProps {
   post: any

@@ -16,7 +16,7 @@ import {
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { toast } from 'sonner'
-import { Locale } from '../../i18n-config'
+import { Locale } from '../lib/i18n-config'
 
 const ContactForm = ({ lang }: { lang: Locale }) => {
   console.log({ lang })

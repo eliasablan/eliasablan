@@ -1,6 +1,6 @@
 import PostItem from './PostItem'
 import { getPosts, getPostsByTag } from '@/sanity/queries'
-import { Locale } from '../../i18n-config'
+import { Locale } from '../lib/i18n-config'
 
 interface PostsProps {
   tag?: string | null

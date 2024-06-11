@@ -16,18 +16,22 @@ import { Settings } from '../../sanity.types'
 import DynamicSanityIcon from './DynamicSanityIcon'
 import { getSettings } from '@/sanity/queries'
 import LocaleSwitcher from './LocaleSwitcher'
-import { Locale } from '../../i18n-config'
+import { Locale } from '../lib/i18n-config'
 
-const Header = ({ lang = 'en' }: { lang?: Locale }) => {
+const Header = ({ lang }: { lang?: Locale }) => {
   const [items, setItems] = useState<Settings['urls']>([])
-  const pathname = usePathname()
   const [open, setOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
+  const pathname = usePathname()
 
   useEffect(() => {
     getSettings().then((result) => {
       setItems(result?.urls || [])
+      setMounted(true)
     })
   }, [])
+
+  if (!mounted) return null
 
   return (
     <motion.div
@@ -40,7 +44,7 @@ const Header = ({ lang = 'en' }: { lang?: Locale }) => {
         {/* Menu */}
         <nav className="flex text-sm">
           <Link
-            href={`/${lang}`}
+            href={`/${lang ? lang : pathname.slice(1, 3)}`}
             className={cn(
               'h-auto rounded-lg px-3 py-1.5 capitalize transition-all duration-150 ease-in-out hover:bg-secondary',
               pathname === '/' && 'bg-secondary'
@@ -67,7 +71,7 @@ const Header = ({ lang = 'en' }: { lang?: Locale }) => {
           {items?.map((link) => (
             <Link
               key={link._key}
-              href={`/${lang}/${link.url!}`}
+              href={`/${lang ? lang : pathname.slice(1, 3)}/${link.url!}`}
               className={cn(
                 'flex w-full items-center rounded-lg px-[8px] py-[6px] capitalize transition-all duration-150 ease-in-out hover:bg-secondary md:py-[3px]',
                 pathname.slice(1) === link.url && 'bg-secondary'

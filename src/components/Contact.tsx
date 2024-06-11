@@ -1,6 +1,6 @@
 import React from 'react'
 import ContactForm from './ContactForm'
-import { Locale } from '../../i18n-config'
+import { Locale } from '../lib/i18n-config'
 
 const Contact = ({ lang }: { lang: Locale }) => {
   return (
