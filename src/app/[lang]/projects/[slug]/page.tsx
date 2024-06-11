@@ -12,7 +12,7 @@ import PortableTextComponents from '@/components/PortableTextComponents'
 import DynamicSanityIcon from '@/components/DynamicSanityIcon'
 import { badgeVariants } from '@/components/ui/badge'
 import { buttonVariants } from '@/components/ui/button'
-import { Locale } from '../../../../../i18n-config'
+import { Locale } from '../../../../lib/i18n-config'
 
 export const generateMetadata = async ({ params }: ProjectProps) => {
   const project = await getProjectData(params.slug)

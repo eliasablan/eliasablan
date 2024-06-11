@@ -1,6 +1,6 @@
 import React from 'react'
 import Blog from '@/components/Blog'
-import { Locale } from '../../../../i18n-config'
+import { Locale } from '../../../lib/i18n-config'
 
 export const metadata = {
   title: 'Blog',

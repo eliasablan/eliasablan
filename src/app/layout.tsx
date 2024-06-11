@@ -13,7 +13,7 @@ import './globals.css'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
-import { i18n, type Locale } from '../../../i18n-config'
+import { i18n, type Locale } from '../lib/i18n-config'
 
 export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }))
@@ -36,6 +36,7 @@ export default function RootLayout({
   children: React.ReactNode
   params: { lang: Locale }
 }>) {
+  console.log({ test: params.lang })
   return (
     <html lang={params.lang}>
       <body

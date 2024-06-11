@@ -7,7 +7,7 @@ import type { Metadata } from 'next'
 
 import { getHome } from '@/sanity/queries'
 import { urlFor } from '@/sanity/utils'
-import { Locale } from '../../../i18n-config'
+import { Locale } from '../../lib/i18n-config'
 
 export async function generateMetadata() {
   const data = await getHome()

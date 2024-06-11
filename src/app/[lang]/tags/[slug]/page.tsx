@@ -3,7 +3,7 @@ import Blog from '@/components/Blog'
 
 import { getTagData, getTags } from '@/sanity/queries'
 import Projects from '@/components/Projects'
-import { Locale } from '../../../../../i18n-config'
+import { Locale } from '../../../../lib/i18n-config'
 
 export const generateMetadata = async ({ params }: TagProps) => {
   const tag = await getTagData(params.slug)

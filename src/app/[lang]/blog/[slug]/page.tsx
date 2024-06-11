@@ -7,7 +7,7 @@ import { getPostData, getPosts } from '@/sanity/queries'
 import { urlFor } from '@/sanity/utils'
 import { cn } from '@/lib/utils'
 import { badgeVariants } from '@/components/ui/badge'
-import { Locale } from '../../../../../i18n-config'
+import { Locale } from '../../../../lib/i18n-config'
 
 interface PostProps {
   params: {
