@@ -29,8 +29,6 @@ export default function Home({
 }: {
   params: { lang: Locale }
 }) {
-  console.log({ lang })
-
   return (
     <main className="relative m-auto max-w-2xl">
       <div className="grid md:grid-cols-1">

@@ -33,7 +33,7 @@ const Header = ({ lang = 'en' }: { lang?: Locale }) => {
     <motion.div
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      className="fixed z-20 hidden w-full bg-gradient-to-b from-background via-background py-1 align-middle md:block"
+      className="fixed z-20 hidden w-full bg-gradient-to-b from-background via-background py-2 align-middle md:block"
     >
       {/* Desktop */}
       <div className="m-auto hidden w-full max-w-2xl items-center gap-2 px-2 md:flex">
@@ -65,29 +65,28 @@ const Header = ({ lang = 'en' }: { lang?: Locale }) => {
             </svg>
           </Link>
           {items?.map((link) => (
-            <div className="px-1" key={link._key}>
-              <Link
-                href={`/${lang}/${link.url!}`}
-                className={cn(
-                  'flex w-full items-center rounded-lg px-[8px] py-[6px] capitalize transition-all duration-150 ease-in-out hover:bg-secondary md:py-[3px]',
-                  pathname.slice(1) === link.url && 'bg-secondary'
-                )}
-              >
-                {link.icon && (
-                  <div className="flex h-5 w-5 items-center justify-center">
-                    <DynamicSanityIcon icon={link.icon} />
-                  </div>
-                )}
-                <span>{link.text}</span>
-              </Link>
-            </div>
+            <Link
+              key={link._key}
+              href={`/${lang}/${link.url!}`}
+              className={cn(
+                'flex w-full items-center rounded-lg px-[8px] py-[6px] capitalize transition-all duration-150 ease-in-out hover:bg-secondary md:py-[3px]',
+                pathname.slice(1) === link.url && 'bg-secondary'
+              )}
+            >
+              {link.icon && (
+                <div className="flex h-5 w-5 items-center justify-center">
+                  <DynamicSanityIcon icon={link.icon} />
+                </div>
+              )}
+              <span>{link.text}</span>
+            </Link>
           ))}
         </nav>
 
         {/* RRSS */}
         <div className="ml-auto flex gap-2">
           <Link
-            className="text-lg hover:opacity-80"
+            className="text-lg hover:text-destructive"
             target="_blank"
             href="mailto:eliasgui32@gmail.com"
           >
@@ -140,7 +139,7 @@ const Header = ({ lang = 'en' }: { lang?: Locale }) => {
             </svg>
           </Link>
           <Link
-            className="text-lg hover:opacity-80"
+            className="text-lg hover:text-destructive"
             target="_blank"
             href="https://twitter.com/eliasablan"
           >
@@ -163,7 +162,7 @@ const Header = ({ lang = 'en' }: { lang?: Locale }) => {
             </svg>
           </Link>
           <Link
-            className="text-lg hover:opacity-80"
+            className="text-lg hover:text-destructive"
             target="_blank"
             href="https://instagram.com/eliasablan"
           >
@@ -200,7 +199,7 @@ const Header = ({ lang = 'en' }: { lang?: Locale }) => {
             </svg>
           </Link>
           <Link
-            className="text-lg hover:opacity-80"
+            className="text-lg hover:text-destructive"
             target="_blank"
             href="https://linkedin.com/in/eliasablan"
           >
@@ -258,7 +257,7 @@ const Header = ({ lang = 'en' }: { lang?: Locale }) => {
             </svg>
           </Link>
           <Link
-            className="text-lg hover:opacity-80"
+            className="text-lg hover:text-destructive"
             target="_blank"
             href="https://github.com/eliasablan"
           >

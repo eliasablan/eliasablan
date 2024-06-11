@@ -39,8 +39,10 @@ export default function LocaleSwitcher() {
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="h-12 w-12 rounded-full bg-transparent p-0">
-            <span>{locales[pathname.split('/')[1]].flag}</span>
+          <NavigationMenuTrigger className="h-full px-2 py-1">
+            <span className="mt-1">
+              {locales[pathname.split('/')[1]].flag}
+            </span>
           </NavigationMenuTrigger>
           <NavigationMenuContent className="rounded-none" asChild>
             <ul className="flex flex-col">
@@ -48,7 +50,7 @@ export default function LocaleSwitcher() {
                 <li key={locale}>
                   <NavigationMenuLink asChild>
                     <Link
-                      className="line-clamp-1 flex w-full gap-2 text-nowrap px-3 py-2 text-sm capitalize hover:bg-accent"
+                      className="line-clamp-1 flex w-full gap-2 text-nowrap px-3 py-2 text-sm font-medium capitalize hover:bg-accent"
                       href={redirectPathName(locale)}
                     >
                       <span>{`${locales[locale].flag}`}</span>
