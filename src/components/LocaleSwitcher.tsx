@@ -33,7 +33,7 @@ export default function LocaleSwitcher() {
           <NavigationMenuTrigger className="item-center flex h-full px-2 py-1">
             <ReactCountryFlag
               className="my-1"
-              countryCode={flagsAndLabels[i18n.defaultLocale].flag}
+              countryCode={flagsAndLabels[pathname.split('/')[1]].flag}
               svg
             />
           </NavigationMenuTrigger>

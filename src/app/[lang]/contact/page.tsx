@@ -1,11 +1,15 @@
 import React from 'react'
 import Contact from '@/components/Contact'
-import { Locale } from '../../../lib/i18n-config'
+import { Locale, i18n } from '../../../lib/i18n-config'
 
 export const metadata = {
   title: 'Contact Form',
   description:
     'Leave an email and message in my inbox to get in touch with me.',
+}
+
+export async function generateStaticParams() {
+  return i18n.locales.map((locale) => ({ lang: locale }))
 }
 
 export default function page({

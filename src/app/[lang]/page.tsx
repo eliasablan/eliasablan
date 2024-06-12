@@ -7,9 +7,18 @@ import type { Metadata } from 'next'
 
 import { getHome } from '@/lib/sanity/queries'
 import { urlFor } from '@/lib/sanity/utils'
-import { Locale } from '../../lib/i18n-config'
+import { Locale, i18n } from '../../lib/i18n-config'
 
-export async function generateMetadata() {
+interface PageProps {
+  params: { lang: Locale }
+}
+
+export async function generateStaticParams() {
+  return i18n.locales.map((locale) => ({ lang: locale }))
+}
+
+export async function generateMetadata({ params: { lang } }: PageProps) {
+  console.log({ lang })
   const data = await getHome()
   const title = data?.title
   const description = data?.seo_description
@@ -24,11 +33,7 @@ export async function generateMetadata() {
   return metadata
 }
 
-export default function Home({
-  params: { lang },
-}: {
-  params: { lang: Locale }
-}) {
+export default function Home({ params: { lang } }: PageProps) {
   return (
     <main className="relative m-auto max-w-2xl">
       <div className="grid md:grid-cols-1">

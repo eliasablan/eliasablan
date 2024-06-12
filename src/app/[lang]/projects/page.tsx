@@ -1,11 +1,15 @@
 import React from 'react'
 import Projects from '@/components/Projects'
-import { Locale } from '../../../lib/i18n-config'
+import { Locale, i18n } from '../../../lib/i18n-config'
 
 export const metadata = {
   title: 'Projects',
   description:
     "I'm a software developer with 5+ years of experience. My portfolio showcases my work on a variety of projects, including websites, web applications, and mobile apps.",
+}
+
+export async function generateStaticParams() {
+  return i18n.locales.map((locale) => ({ lang: locale }))
 }
 
 export default function page({
