@@ -3,9 +3,9 @@ import { PortableText } from '@portabletext/react'
 import Link from 'next/link'
 import Image from 'next/image'
 
-import { getProjectData, getProjects } from '@/sanity/queries'
+import { getProjectData, getProjects } from '@/lib/sanity/queries'
 import { getImageDimensions } from '@sanity/asset-utils'
-import { urlFor } from '@/sanity/utils'
+import { urlFor } from '@/lib/sanity/utils'
 import { cn } from '@/lib/utils'
 
 import PortableTextComponents from '@/components/PortableTextComponents'

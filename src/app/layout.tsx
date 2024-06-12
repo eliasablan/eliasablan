@@ -36,7 +36,6 @@ export default function RootLayout({
   children: React.ReactNode
   params: { lang: Locale }
 }>) {
-  console.log({ test: params.lang })
   return (
     <html lang={params.lang}>
       <body

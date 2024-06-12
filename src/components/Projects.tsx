@@ -1,6 +1,6 @@
 import { Locale } from '../lib/i18n-config'
 import ProjectSquare from './ProjectSquare'
-import { getProjects } from '@/sanity/queries'
+import { getProjects } from '@/lib/sanity/queries'
 
 interface ProjectsProps {
   tag?: string

@@ -17,7 +17,7 @@ import { ModeToggle } from '@/components/ThemeToggler'
 import { cn } from '@/lib/utils'
 import { Settings } from '../../sanity.types'
 import DynamicSanityIcon from './DynamicSanityIcon'
-import { getSettings } from '@/sanity/queries'
+import { getSettings } from '@/lib/sanity/queries'
 import LocaleSwitcher from './LocaleSwitcher'
 import MobileLocaleSwitcher from './MobileLocaleSwitcher'
 

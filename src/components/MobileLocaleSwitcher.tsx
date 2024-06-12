@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import ReactCountryFlag from 'react-country-flag'
 
-import { i18n } from '../lib/i18n-config'
+import { i18n, flagsAndLabels } from '../lib/i18n-config'
 
 import { Button } from '@/components/ui/button'
 import {
@@ -16,15 +16,6 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { DrawerClose } from '@/components/ui/drawer'
 
-const locales: { [key: string]: { flag: string; label: string } } = {
-  en: { flag: '🇬🇧', label: 'English' },
-  de: { flag: '🇩🇪', label: 'Deutsch' },
-  cs: { flag: '🇨🇿', label: 'Čeština' },
-  es: { flag: '🇪🇸', label: 'Español' },
-  fr: { flag: '🇫🇷', label: 'Français' },
-  it: { flag: '🇮🇹', label: 'Italiano' },
-  pt: { flag: '🇵🇹', label: 'Português' },
-}
 interface MobileLocaleSwitcherProps {
   align?: 'start' | 'center' | 'end'
   variant?:
@@ -58,11 +49,7 @@ export default function MobileLocaleSwitcher({
             style={{
               fontSize: '2em',
             }}
-            countryCode={
-              (pathname.split('/')[1] === 'en' && 'gb') ||
-              (pathname.split('/')[1] === 'cs' && 'cz') ||
-              pathname.split('/')[1]
-            }
+            countryCode={flagsAndLabels[pathname.split('/')[1]].flag}
             svg
           />
           <span className="sr-only">Toggle Language</span>
@@ -77,21 +64,17 @@ export default function MobileLocaleSwitcher({
           <DrawerClose key={locale} asChild>
             <DropdownMenuItem key={locale} asChild>
               <Link
-                className="grid cursor-pointer grid-cols-2 px-4 py-6 text-lg font-bold capitalize hover:bg-accent"
+                className="flex cursor-pointer justify-start gap-4 px-4 py-6 text-lg capitalize hover:bg-accent"
                 href={redirectPathName(locale)}
               >
                 <ReactCountryFlag
                   style={{
                     fontSize: '2em',
                   }}
-                  countryCode={
-                    (locale === 'en' && 'gb') ||
-                    (locale === 'cs' && 'cz') ||
-                    locale
-                  }
+                  countryCode={flagsAndLabels[locale].flag}
                   svg
                 />
-                <span>{`${locales[locale].label}`}</span>
+                <span>{`${flagsAndLabels[locale].label}`}</span>
               </Link>
             </DropdownMenuItem>
           </DrawerClose>

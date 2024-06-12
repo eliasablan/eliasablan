@@ -1,4 +1,4 @@
-import { getTags } from '@/sanity/queries'
+import { getTags } from '@/lib/sanity/queries'
 import Link from 'next/link'
 import { badgeVariants } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'

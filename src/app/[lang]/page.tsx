@@ -5,8 +5,8 @@ import Blog from '@/components/Blog'
 import Tags from '@/components/Tags'
 import type { Metadata } from 'next'
 
-import { getHome } from '@/sanity/queries'
-import { urlFor } from '@/sanity/utils'
+import { getHome } from '@/lib/sanity/queries'
+import { urlFor } from '@/lib/sanity/utils'
 import { Locale } from '../../lib/i18n-config'
 
 export async function generateMetadata() {

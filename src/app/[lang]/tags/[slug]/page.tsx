@@ -1,7 +1,7 @@
 import React from 'react'
 import Blog from '@/components/Blog'
 
-import { getTagData, getTags } from '@/sanity/queries'
+import { getTagData, getTags } from '@/lib/sanity/queries'
 import Projects from '@/components/Projects'
 import { Locale } from '../../../../lib/i18n-config'
 

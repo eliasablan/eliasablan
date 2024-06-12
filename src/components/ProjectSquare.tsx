@@ -11,7 +11,7 @@ import {
   HoverCardTrigger,
 } from '@/components/ui/hover-card'
 
-import { urlFor } from '@/sanity/utils'
+import { urlFor } from '@/lib/sanity/utils'
 import { getImageDimensions } from '@sanity/asset-utils'
 import { Locale } from '../lib/i18n-config'
 

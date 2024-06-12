@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import { urlFor } from '@/sanity/utils'
+import { urlFor } from '@/lib/sanity/utils'
 import { getImageDimensions } from '@sanity/asset-utils'
 import { ImageAsset } from '@sanity/types'
 import { PortableTextReactComponents } from 'next-sanity'

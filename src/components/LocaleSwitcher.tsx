@@ -2,9 +2,10 @@
 
 import React from 'react'
 import Link from 'next/link'
+import ReactCountryFlag from 'react-country-flag'
 import { usePathname } from 'next/navigation'
 
-import { i18n } from '../lib/i18n-config'
+import { i18n, flagsAndLabels } from '../lib/i18n-config'
 
 import {
   NavigationMenu,
@@ -14,16 +15,6 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu'
-
-const locales: { [key: string]: { flag: string; label: string } } = {
-  en: { flag: '🇬🇧', label: 'English' },
-  de: { flag: '🇩🇪', label: 'Deutsch' },
-  cs: { flag: '🇨🇿', label: 'Čeština' },
-  es: { flag: '🇪🇸', label: 'Español' },
-  fr: { flag: '🇫🇷', label: 'Français' },
-  it: { flag: '🇮🇹', label: 'Italiano' },
-  pt: { flag: '🇵🇹', label: 'Português' },
-}
 
 export default function LocaleSwitcher() {
   const pathname = usePathname()
@@ -39,10 +30,12 @@ export default function LocaleSwitcher() {
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="h-full px-2 py-1">
-            <span className="mt-1">
-              {locales[pathname.split('/')[1]].flag}
-            </span>
+          <NavigationMenuTrigger className="item-center flex h-full px-2 py-1">
+            <ReactCountryFlag
+              className="my-1"
+              countryCode={flagsAndLabels[i18n.defaultLocale].flag}
+              svg
+            />
           </NavigationMenuTrigger>
           <NavigationMenuContent className="rounded-none" asChild>
             <ul className="flex flex-col">
@@ -50,11 +43,14 @@ export default function LocaleSwitcher() {
                 <li key={locale}>
                   <NavigationMenuLink asChild>
                     <Link
-                      className="line-clamp-1 flex w-full gap-2 text-nowrap px-3 py-2 text-sm font-medium capitalize hover:bg-accent"
+                      className="flex w-32 items-center gap-2 p-4 text-sm capitalize hover:bg-accent"
                       href={redirectPathName(locale)}
                     >
-                      <span>{`${locales[locale].flag}`}</span>
-                      <span>{`${locales[locale].label}`}</span>
+                      <ReactCountryFlag
+                        countryCode={flagsAndLabels[locale].flag}
+                        svg
+                      />
+                      <span>{`${flagsAndLabels[locale].label}`}</span>
                     </Link>
                   </NavigationMenuLink>
                 </li>
