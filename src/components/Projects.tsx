@@ -9,7 +9,6 @@ interface ProjectsProps {
 
 const Projects = async ({ tag, lang }: ProjectsProps) => {
   const projects = await getProjects(tag)
-  console.log({ lang })
 
   return (
     <div className="py-8 md:pt-12">

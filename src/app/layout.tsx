@@ -55,7 +55,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Header lang={params.lang} />
+          <Header />
           {children}
           <Footer />
           <Toaster richColors expand closeButton />

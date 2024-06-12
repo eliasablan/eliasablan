@@ -84,19 +84,6 @@ const ProjectSquare = ({ lang, project }: ProjectSquareProps) => {
       </HoverCardTrigger>
       <HoverCardContent>
         <h3 className="mb-2 text-base font-medium">{project.name}</h3>
-        {/* <p className="mb-2 font-mono text-xs font-semibold">
-          <div
-            className={cn(
-              'mr-2 inline-block h-[8px] w-[8px] rounded-full',
-              project.status === 'development' && 'bg-blue-500',
-              project.status === 'completed' && 'bg-yellow-500',
-              project.status === 'deployed' && 'bg-green-500'
-            )}
-          ></div>
-          {project.status &&
-            project.status.charAt(0).toUpperCase() +
-              project.status.slice(1)}
-        </p> */}
         <div className="mb-2">
           {project.tags?.map((tag: any) => (
             <Badge key={tag._id} variant="secondary" className="mr-0.5">
