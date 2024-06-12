@@ -48,24 +48,24 @@ export function ModeToggle({
         align={align}
       >
         <DropdownMenuItem
-          className="group flex justify-start gap-4 px-6 py-8"
+          className="group flex justify-start gap-4 px-6 py-8 md:px-4 md:py-6"
           onClick={() => setTheme('light')}
         >
-          <Sun className="delay-250 h-5 w-5 transition-all group-hover:rotate-90" />
+          <Sun className="delay-250 h-4 w-4 transition-all duration-500 ease-in-out group-hover:rotate-180" />
           Light
         </DropdownMenuItem>
         <DropdownMenuItem
-          className="group flex justify-start gap-4 px-6 py-8"
+          className="group flex justify-start gap-4 px-6 py-8 md:px-4 md:py-6"
           onClick={() => setTheme('dark')}
         >
-          <Moon className="delay-250 h-5 w-5 transition-all group-hover:rotate-90" />
+          <Moon className="delay-250 h-4 w-4 transition-all duration-500 ease-in-out group-hover:rotate-180" />
           Dark
         </DropdownMenuItem>
         <DropdownMenuItem
-          className="group flex justify-start gap-4 px-6 py-8"
+          className="group flex justify-start gap-4 px-6 py-8 md:px-4 md:py-6"
           onClick={() => setTheme('system')}
         >
-          <Settings className="delay-250 h-5 w-5 transition-all group-hover:rotate-90" />
+          <Settings className="delay-250 h-4 w-4 transition-all duration-500 ease-out group-hover:rotate-90" />
           System
         </DropdownMenuItem>
       </DropdownMenuContent>

@@ -14,10 +14,11 @@ import {
 import { urlFor } from '@/lib/sanity/utils'
 import { getImageDimensions } from '@sanity/asset-utils'
 import { Locale } from '../lib/i18n-config'
+import { GetProjectsQueryResult } from '../../sanity.types'
 
 interface ProjectSquareProps {
-  lang: Locale
-  project: any
+  lang?: Locale
+  project: GetProjectsQueryResult[0]
 }
 
 const ProjectSquare = ({ lang, project }: ProjectSquareProps) => {

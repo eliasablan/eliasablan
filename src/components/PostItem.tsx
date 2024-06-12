@@ -2,9 +2,13 @@ import Link from 'next/link'
 import React from 'react'
 import { DateJSX } from './Date'
 import { Locale } from '../lib/i18n-config'
+import {
+  GetPostsByTagQueryResult,
+  GetPostsQueryResult,
+} from '../../sanity.types'
 
 interface PostItemProps {
-  post: any
+  post: GetPostsQueryResult[0] | GetPostsByTagQueryResult[0]
   lang: Locale
 }
 

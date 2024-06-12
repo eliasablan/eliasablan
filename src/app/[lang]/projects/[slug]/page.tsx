@@ -51,8 +51,8 @@ const project = async ({ params }: ProjectProps) => {
   const project = await getProjectData(slug)
 
   return (
-    <main className="relative mx-auto w-full max-w-2xl">
-      <article className="px-6 pb-28 pt-8 md:mt-6 md:pt-16">
+    <main className="mx-auto w-full max-w-2xl px-5 py-12">
+      <article className="px-6 py-12">
         <div className="mx-auto mb-10 block max-w-sm text-center">
           {project?.logo && (
             <Image

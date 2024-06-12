@@ -37,7 +37,7 @@ const tag = async ({ params }: TagProps) => {
   const { lang, slug } = params
   const tag = await getTagData(slug)
   return (
-    <main className="mx-auto w-full max-w-2xl px-5 pb-12 md:pb-0 md:pt-7">
+    <main className="mx-auto w-full max-w-2xl px-5 py-12">
       <div className="py-8 md:pt-12">
         <h2 className="text-xl font-medium"># {tag?.name}</h2>
         <Projects lang={lang} tag={slug} />
