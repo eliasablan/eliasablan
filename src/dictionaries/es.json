@@ -15,5 +15,9 @@
     "light": "Claro",
     "dark": "Oscuro",
     "system": "Sistema"
+  },
+  "header": {
+    "home": "Inicio",
+    "mobileTitle": "Menú de navegación"
   }
 }

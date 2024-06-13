@@ -15,5 +15,9 @@
     "light": "Light",
     "dark": "Dark",
     "system": "System"
+  },
+  "header": {
+    "home": "Home",
+    "mobileTitle": "Navigation Menu"
   }
 }

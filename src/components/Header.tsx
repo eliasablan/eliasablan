@@ -21,6 +21,7 @@ import { getSettings } from '@/lib/sanity/queries'
 import LocaleSwitcher from './LocaleSwitcher'
 import MobileLocaleSwitcher from './MobileLocaleSwitcher'
 import { Locale } from '@/lib/i18n-config'
+import { useDictionary } from './dictionary-provider'
 
 const Header = () => {
   const [items, setItems] = useState<Settings['urls']>([])
@@ -30,6 +31,7 @@ const Header = () => {
   const [lang, setLang] = useState<Locale>(
     usePathname().split('/')[1] as Locale
   )
+  const dictionary = useDictionary()
 
   useEffect(() => {
     getSettings(lang).then((result) => {
@@ -372,7 +374,7 @@ const Header = () => {
           <DrawerContent className="p-4 pb-8">
             {/* Navigation */}
             <DrawerHeader className="mx-auto my-4 grid w-full max-w-md">
-              <DrawerTitle>Navigation</DrawerTitle>
+              <DrawerTitle>{dictionary.header.mobileTitle}</DrawerTitle>
             </DrawerHeader>
             <div className="mx-auto grid w-full max-w-md grid-cols-2 gap-4 px-4">
               <DrawerClose asChild>
@@ -400,7 +402,7 @@ const Header = () => {
                       strokeWidth="16"
                     />
                   </svg>
-                  <span>Home</span>
+                  <span>{dictionary.header.home}</span>
                 </Link>
               </DrawerClose>
               {items?.map((link) => (
