@@ -18,12 +18,11 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params: { lang } }: PageProps) {
-  console.log({ lang })
-  const data = await getHome()
-  const title = data?.title
-  const description = data?.seo_description
-  const og_image = data?.og_image
-    ? urlFor(data?.og_image).url()
+  const data = await getHome(lang)
+  const title = data?.seo?.title
+  const description = data?.seo?.description
+  const og_image = data?.seo?.og_image
+    ? urlFor(data?.seo?.og_image).url()
     : undefined
 
   let metadata: Metadata = {}

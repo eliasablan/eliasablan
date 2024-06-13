@@ -17,9 +17,9 @@ import { Locale } from '../../../../lib/i18n-config'
 export const generateMetadata = async ({ params }: ProjectProps) => {
   const project = await getProjectData(params.slug)
   const title = project?.name
-  const description = project?.short_description
-  const og_image = project?.og_image
-    ? urlFor(project?.og_image).url()
+  const description = project?.seo?.description
+  const og_image = project?.seo?.og_image
+    ? urlFor(project?.seo?.og_image).url()
     : undefined
 
   return {
@@ -38,11 +38,11 @@ interface ProjectProps {
   }
 }
 
-export async function generateStaticParams() {
-  const projects = await getProjects()
+export async function generateStaticParams({ params }: ProjectProps) {
+  const projects = await getProjects({ lang: params.lang })
 
   return projects.map((project) => ({
-    slug: project?.slug?.current,
+    slug: project?.slug,
   }))
 }
 

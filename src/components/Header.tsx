@@ -20,20 +20,33 @@ import DynamicSanityIcon from './DynamicSanityIcon'
 import { getSettings } from '@/lib/sanity/queries'
 import LocaleSwitcher from './LocaleSwitcher'
 import MobileLocaleSwitcher from './MobileLocaleSwitcher'
+import { Locale } from '@/lib/i18n-config'
 
 const Header = () => {
   const [items, setItems] = useState<Settings['urls']>([])
   const [open, setOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
   const pathname = usePathname()
-  const lang = usePathname().split('/')[1]
+  const [lang, setLang] = useState<Locale>(
+    usePathname().split('/')[1] as Locale
+  )
 
   useEffect(() => {
-    getSettings().then((result) => {
+    getSettings(lang).then((result) => {
       setItems(result?.urls || [])
       setMounted(true)
     })
   }, [])
+  useEffect(() => {
+    getSettings(pathname.split('/')[1] as Locale).then((result) => {
+      setItems(result?.urls || [])
+      setMounted(true)
+    })
+  }, [pathname])
+
+  useEffect(() => {
+    setLang(pathname.split('/')[1] as Locale)
+  }, [pathname])
 
   if (!mounted) return null
 
@@ -82,11 +95,6 @@ const Header = () => {
                   pathname.slice(1) === link.url && 'bg-secondary'
                 )}
               >
-                {/* {link.icon && (
-                  <div className="flex h-5 w-5 items-center justify-center">
-                    <DynamicSanityIcon icon={link.icon} />
-                  </div>
-                )} */}
                 <span>{link.text}</span>
               </Link>
             ))}

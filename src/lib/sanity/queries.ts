@@ -8,6 +8,7 @@ import {
   getSettingsQuery,
   // Projects
   getProjectsQuery,
+  getProjectsByTagQuery,
   getProjectDataQuery,
   // Posts
   getPostsQuery,
@@ -24,10 +25,10 @@ import {
   GetProjectDataQueryResult,
   GetPostsQueryResult,
   GetPostDataQueryResult,
-  GetPostsByTagQueryResult,
   GetTagsQueryResult,
   GetTagDataQueryResult,
 } from '../../../sanity.types'
+import { Locale } from '../i18n-config'
 // #endregion
 
 async function sanityFetch<QueryResponse>({
@@ -36,10 +37,10 @@ async function sanityFetch<QueryResponse>({
   tags,
 }: {
   query: string
-  params?: QueryParams
+  params?: { [key: string]: string | undefined }
   tags?: string[]
 }) {
-  return client.fetch<QueryResponse>(query, params, {
+  return client.fetch<QueryResponse>(query, params as QueryParams, {
     cache:
       process.env.NODE_ENV === 'production' ? 'force-cache' : 'no-store',
     next: {
@@ -49,31 +50,37 @@ async function sanityFetch<QueryResponse>({
 }
 
 // #region Home and Settings
-export async function getHome(): Promise<GetHomeQueryResult> {
+export async function getHome(lang: Locale): Promise<GetHomeQueryResult> {
   return sanityFetch({
     query: getHomeQuery,
-    tags: ['home'],
+    params: { lang },
+    tags: [`${lang}:home`],
   })
 }
 
-export async function getSettings(): Promise<GetSettingsQueryResult> {
+export async function getSettings(
+  lang: Locale
+): Promise<GetSettingsQueryResult> {
   return sanityFetch({
     query: getSettingsQuery,
-    tags: ['settings'],
+    params: { lang },
+    tags: [`${lang}:settings`],
   })
 }
 // #endregion
 
 // #region Projects
-export async function getProjects(
-  slug?: string
-): Promise<GetProjectsQueryResult> {
-  const params = slug ? { slug } : { slug: '' }
-  const tags = slug ? ['project', 'tag'] : ['project']
+export async function getProjects({
+  tag = '',
+  lang,
+}: {
+  tag?: string
+  lang: Locale
+}): Promise<GetProjectsQueryResult> {
   return sanityFetch({
-    query: getProjectsQuery,
-    params,
-    tags,
+    query: tag ? getProjectsByTagQuery : getProjectsQuery,
+    params: { tag, lang },
+    tags: [`${lang}:project`],
   })
 }
 
@@ -89,20 +96,17 @@ export async function getProjectData(
 // #endregion
 
 // #region Posts
-export async function getPosts(): Promise<GetPostsQueryResult> {
+export async function getPosts({
+  tag = '',
+  lang,
+}: {
+  tag?: string
+  lang: Locale
+}): Promise<GetPostsQueryResult> {
   return sanityFetch({
-    query: getPostsQuery,
-    tags: ['post'],
-  })
-}
-
-export async function getPostsByTag(
-  slug: string
-): Promise<GetPostsByTagQueryResult> {
-  return sanityFetch({
-    query: getPostsByTagQuery,
-    params: { slug },
-    tags: ['post'],
+    query: tag ? getPostsByTagQuery : getPostsQuery,
+    params: { tag, lang },
+    tags: [`${lang}:post`],
   })
 }
 

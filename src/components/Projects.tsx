@@ -8,7 +8,7 @@ interface ProjectsProps {
 }
 
 const Projects = async ({ tag, lang }: ProjectsProps) => {
-  const projects = await getProjects(tag)
+  const projects = await getProjects({ tag, lang })
 
   return (
     <div className="py-8 md:pt-12">

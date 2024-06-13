@@ -18,10 +18,10 @@ interface PostProps {
 
 export const generateMetadata = async ({ params }: PostProps) => {
   const post = await getPostData(params.slug)
-  const title = post?.title
-  const description = post?.description
-  const og_image = post?.og_image
-    ? urlFor(post?.og_image).url()
+  const title = post?.seo?.title
+  const description = post?.seo?.description
+  const og_image = post?.seo?.og_image
+    ? urlFor(post?.seo?.og_image).url()
     : undefined
 
   return {
@@ -33,8 +33,8 @@ export const generateMetadata = async ({ params }: PostProps) => {
   }
 }
 
-export async function generateStaticParams() {
-  const posts = await getPosts()
+export async function generateStaticParams({ params }: PostProps) {
+  const posts = await getPosts({ lang: params.lang })
 
   return posts.map((post) => ({
     slug: post?.slug,

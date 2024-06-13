@@ -1,19 +1,14 @@
 import PostItem from './PostItem'
-import { getPosts, getPostsByTag } from '@/lib/sanity/queries'
+import { getPosts } from '@/lib/sanity/queries'
 import { Locale } from '../lib/i18n-config'
 
 interface PostsProps {
-  tag?: string | null
+  tag?: string
   lang: Locale
 }
 
-const Blog = async ({ tag = null, lang }: PostsProps) => {
-  let posts = null
-  if (tag) {
-    posts = await getPostsByTag(tag)
-  } else {
-    posts = await getPosts()
-  }
+const Blog = async ({ tag, lang }: PostsProps) => {
+  const posts = await getPosts({ tag, lang })
 
   return (
     <div className="py-8 md:pt-12">

@@ -25,7 +25,7 @@ const ProjectSquare = ({ lang, project }: ProjectSquareProps) => {
   return (
     <HoverCard>
       <HoverCardTrigger asChild>
-        <Link href={`/${lang}/projects/${project.slug?.current}`}>
+        <Link href={`/${lang}/projects/${project.slug}`}>
           <Card
             className={cn(
               'bg-radius flex min-w-[120px] flex-col rounded-lg border px-4 py-2 hover:bg-accent'

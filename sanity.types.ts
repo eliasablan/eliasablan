@@ -68,14 +68,64 @@ export type Geopoint = {
   alt?: number
 }
 
+export type TranslationMetadata = {
+  _id: string
+  _type: 'translation.metadata'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  translations?: Array<
+    {
+      _key: string
+    } & InternationalizedArrayReferenceValue
+  >
+  schemaTypes?: Array<string>
+}
+
+export type InternationalizedArrayReferenceValue = {
+  _type: 'internationalizedArrayReferenceValue'
+  value?:
+    | {
+        _ref: string
+        _type: 'reference'
+        _weak?: boolean
+        [internalGroqTypeReferenceTo]?: 'home'
+      }
+    | {
+        _ref: string
+        _type: 'reference'
+        _weak?: boolean
+        [internalGroqTypeReferenceTo]?: 'settings'
+      }
+    | {
+        _ref: string
+        _type: 'reference'
+        _weak?: boolean
+        [internalGroqTypeReferenceTo]?: 'project'
+      }
+    | {
+        _ref: string
+        _type: 'reference'
+        _weak?: boolean
+        [internalGroqTypeReferenceTo]?: 'post'
+      }
+    | {
+        _ref: string
+        _type: 'reference'
+        _weak?: boolean
+        [internalGroqTypeReferenceTo]?: 'tag'
+      }
+}
+
 export type Tag = {
   _id: string
   _type: 'tag'
   _createdAt: string
   _updatedAt: string
   _rev: string
-  name?: string
-  slug?: Slug
+  language?: string
+  name: string
+  slug: Slug
 }
 
 export type Post = {
@@ -84,23 +134,19 @@ export type Post = {
   _createdAt: string
   _updatedAt: string
   _rev: string
+  language?: string
   title?: string
-  description?: string
-  slug?: Slug
-  seo_title?: string
-  seo_description?: string
-  og_image?: {
-    asset?: {
-      _ref: string
-      _type: 'reference'
-      _weak?: boolean
-      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-    }
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    _type: 'image'
-  }
-  content?: Array<
+  slug: Slug
+  seo?: Seo
+  tags?: Array<{
+    _ref: string
+    _type: 'reference'
+    _weak?: boolean
+    _key: string
+    [internalGroqTypeReferenceTo]?: 'tag'
+  }>
+  description: string
+  content: Array<
     | {
         children?: Array<{
           marks?: Array<string>
@@ -141,13 +187,6 @@ export type Post = {
         _key: string
       }
   >
-  tags?: Array<{
-    _ref: string
-    _type: 'reference'
-    _weak?: boolean
-    _key: string
-    [internalGroqTypeReferenceTo]?: 'tag'
-  }>
 }
 
 export type Project = {
@@ -156,21 +195,11 @@ export type Project = {
   _createdAt: string
   _updatedAt: string
   _rev: string
-  name?: string
-  short_description?: string
-  og_image?: {
-    asset?: {
-      _ref: string
-      _type: 'reference'
-      _weak?: boolean
-      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-    }
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    _type: 'image'
-  }
-  slug?: Slug
-  logo?: {
+  language?: string
+  name: string
+  slug: Slug
+  seo?: Seo
+  logo: {
     asset?: {
       _ref: string
       _type: 'reference'
@@ -194,7 +223,7 @@ export type Project = {
     alt?: string
     _type: 'image'
   }
-  status?: 'development' | 'completed' | 'deployed'
+  status: 'development' | 'completed' | 'deployed'
   description?: Array<
     | {
         children?: Array<{
@@ -231,15 +260,15 @@ export type Project = {
         }
         hotspot?: SanityImageHotspot
         crop?: SanityImageCrop
-        alt?: string
+        alt: string
         _type: 'image'
         _key: string
       }
   >
   urls?: Array<{
-    text?: string
-    url?: string
-    icon?: IconPicker
+    text: string
+    url: string
+    icon: IconPicker
     _key: string
   }>
   tags?: Array<{
@@ -251,25 +280,27 @@ export type Project = {
   }>
 }
 
-export type Slug = {
-  _type: 'slug'
-  current?: string
-  source?: string
-}
-
 export type Settings = {
   _id: string
   _type: 'settings'
   _createdAt: string
   _updatedAt: string
   _rev: string
+  language?: string
   urls?: Array<{
-    text?: string
-    url?: string
+    text: string
+    url: string
     icon?: IconPicker
     _key: string
   }>
   footer?: string
+}
+
+export type IconPicker = {
+  _type: 'iconPicker'
+  provider?: string
+  name?: string
+  svg?: string
 }
 
 export type Home = {
@@ -278,20 +309,9 @@ export type Home = {
   _createdAt: string
   _updatedAt: string
   _rev: string
-  title?: string
-  seo_description?: string
-  og_image?: {
-    asset?: {
-      _ref: string
-      _type: 'reference'
-      _weak?: boolean
-      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-    }
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    _type: 'image'
-  }
-  overview?: Array<
+  language?: string
+  seo?: Seo
+  overview: Array<
     | {
         children?: Array<{
           marks?: Array<string>
@@ -391,21 +411,11 @@ export type SanityImageMetadata = {
   isOpaque?: boolean
 }
 
-export type IconPicker = {
-  _type: 'iconPicker'
-  provider?: string
-  name?: string
-  svg?: string
-}
-export declare const internalGroqTypeReferenceTo: unique symbol
-// Source: ./src/lib/sanity/groqQueries.ts
-// Variable: getHomeQuery
-// Query: *[_type=='home'][0] {  _id,  title,  seo_description,  og_image,  overview}
-export type GetHomeQueryResult = {
-  _id: string
-  title: string | null
-  seo_description: string | null
-  og_image: {
+export type Seo = {
+  _type: 'seo'
+  title?: string
+  description?: string
+  og_image?: {
     asset?: {
       _ref: string
       _type: 'reference'
@@ -415,6 +425,51 @@ export type GetHomeQueryResult = {
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
     _type: 'image'
+  }
+}
+
+export type InternationalizedArrayReference = Array<
+  {
+    _key: string
+  } & InternationalizedArrayReferenceValue
+>
+
+export type MediaTag = {
+  _id: string
+  _type: 'media.tag'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  name?: Slug
+}
+
+export type Slug = {
+  _type: 'slug'
+  current: string
+  source?: string
+}
+export declare const internalGroqTypeReferenceTo: unique symbol
+// Source: ./src/lib/sanity/groqQueries.ts
+// Variable: getHomeQuery
+// Query:   *[_type=='home'  && language==$lang]  [0]  {    _id,    title,    seo {...},    overview  }
+export type GetHomeQueryResult = {
+  _id: string
+  title: null
+  seo: {
+    _type: 'seo'
+    title?: string
+    description?: string
+    og_image?: {
+      asset?: {
+        _ref: string
+        _type: 'reference'
+        _weak?: boolean
+        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+      }
+      hotspot?: SanityImageHotspot
+      crop?: SanityImageCrop
+      _type: 'image'
+    }
   } | null
   overview: Array<
     | {
@@ -456,41 +511,56 @@ export type GetHomeQueryResult = {
         _type: 'block'
         _key: string
       }
-  > | null
+  >
 } | null
 // Variable: getSettingsQuery
-// Query: *[_type=='settings'][0] {  urls,  footer}
+// Query:   *[_type=='settings'  && language==$lang]  [0]  {    urls,    footer  }
 export type GetSettingsQueryResult = {
   urls: Array<{
-    text?: string
-    url?: string
+    text: string
+    url: string
     icon?: IconPicker
     _key: string
   }> | null
   footer: string | null
 } | null
 // Variable: getPostsQuery
-// Query: *[_type=='post'] | order(_createdAt desc)[0..9] {  _id,  title,  "slug":slug.current,  _createdAt}
+// Query:   *[_type=='post'  && language==$lang]  | order(_createdAt desc)  [0..9]  {    _id,    title,    "slug":slug.current,    _createdAt  }
 export type GetPostsQueryResult = Array<{
   _id: string
   title: string | null
-  slug: string | null
+  slug: string
   _createdAt: string
 }>
 // Variable: getPostsByTagQuery
-// Query: *[_type=='post' && $slug in tags[]->slug.current] | order(_updatedAt desc)[0..9] {  _id,  title,  "slug":slug.current,  _createdAt}
+// Query:   *[_type=='post'  && language==$lang  && $tag in tags[]->slug.current]  | order(_createdAt desc)  {    _id,    title,    "slug":slug.current,    _createdAt  }
 export type GetPostsByTagQueryResult = Array<{
   _id: string
   title: string | null
-  slug: string | null
+  slug: string
   _createdAt: string
 }>
 // Variable: getPostDataQuery
-// Query: *[_type=='post' && slug.current == $slug][0] {  _id,  title,  description,  content,  og_image,  _createdAt,  tags[]->{    _id,    name,    slug  }}
+// Query:   *[_type=='post'  && slug.current == $slug]  [0]  {    _id,    title,    seo {...},    content,    _createdAt,    tags[]->{      _id,      name,      slug    }  }
 export type GetPostDataQueryResult = {
   _id: string
   title: string | null
-  description: string | null
+  seo: {
+    _type: 'seo'
+    title?: string
+    description?: string
+    og_image?: {
+      asset?: {
+        _ref: string
+        _type: 'reference'
+        _weak?: boolean
+        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+      }
+      hotspot?: SanityImageHotspot
+      crop?: SanityImageCrop
+      _type: 'image'
+    }
+  } | null
   content: Array<
     | {
         asset?: {
@@ -531,33 +601,20 @@ export type GetPostDataQueryResult = {
         _type: 'block'
         _key: string
       }
-  > | null
-  og_image: {
-    asset?: {
-      _ref: string
-      _type: 'reference'
-      _weak?: boolean
-      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-    }
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    _type: 'image'
-  } | null
+  >
   _createdAt: string
   tags: Array<{
     _id: string
-    name: string | null
-    slug: Slug | null
+    name: string
+    slug: Slug
   }> | null
 } | null
 // Variable: getProjectsQuery
-// Query: *[_type=='project' && ($slug == '' || $slug in tags[]->slug.current)] | order(_updatedAt desc)[0..9]{  _id,  slug,  status,  name,  short_description,  logo,  dark_logo,  tags[]->{    _id,    name,    slug  },}
+// Query:   *[_type=='project'  && language==$lang]  | order(_updatedAt desc)  [0..9]  {    _id,    name,    "slug":slug.current,    logo,    dark_logo,    status,    short_description,    tags[]->{      _id,      name,      slug    },  }
 export type GetProjectsQueryResult = Array<{
   _id: string
-  slug: Slug | null
-  status: 'completed' | 'deployed' | 'development' | null
-  name: string | null
-  short_description: string | null
+  name: string
+  slug: string
   logo: {
     asset?: {
       _ref: string
@@ -569,7 +626,7 @@ export type GetProjectsQueryResult = Array<{
     crop?: SanityImageCrop
     alt?: string
     _type: 'image'
-  } | null
+  }
   dark_logo: {
     asset?: {
       _ref: string
@@ -582,18 +639,58 @@ export type GetProjectsQueryResult = Array<{
     alt?: string
     _type: 'image'
   } | null
+  status: 'completed' | 'deployed' | 'development'
+  short_description: null
   tags: Array<{
     _id: string
-    name: string | null
-    slug: Slug | null
+    name: string
+    slug: Slug
+  }> | null
+}>
+// Variable: getProjectsByTagQuery
+// Query:   *[_type=='project'  && language==$lang  && $tag in tags[]->slug.current]  | order(_updatedAt desc)  {    _id,    name,    "slug":slug.current,    logo,    dark_logo,    status,    short_description,    tags[]->{      _id,      name,      slug    },  }
+export type GetProjectsByTagQueryResult = Array<{
+  _id: string
+  name: string
+  slug: string
+  logo: {
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    _type: 'image'
+  }
+  dark_logo: {
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    _type: 'image'
+  } | null
+  status: 'completed' | 'deployed' | 'development'
+  short_description: null
+  tags: Array<{
+    _id: string
+    name: string
+    slug: Slug
   }> | null
 }>
 // Variable: getProjectDataQuery
-// Query: *[_type=='project' && slug.current == $slug][0] {  _id,  name,  short_description,  description,  logo,  dark_logo,  urls,  og_image,  tags[]->{    _id,    name,    slug  }}
+// Query: *[_type=='project' && slug.current == $slug][0] {  _id,  name,  short_description,  description,  logo,  dark_logo,  urls,  seo {...},  tags[]->{    _id,    name,    slug  }}
 export type GetProjectDataQueryResult = {
   _id: string
-  name: string | null
-  short_description: string | null
+  name: string
+  short_description: null
   description: Array<
     | {
         asset?: {
@@ -604,7 +701,7 @@ export type GetProjectDataQueryResult = {
         }
         hotspot?: SanityImageHotspot
         crop?: SanityImageCrop
-        alt?: string
+        alt: string
         _type: 'image'
         _key: string
       }
@@ -646,7 +743,7 @@ export type GetProjectDataQueryResult = {
     crop?: SanityImageCrop
     alt?: string
     _type: 'image'
-  } | null
+  }
   dark_logo: {
     asset?: {
       _ref: string
@@ -660,37 +757,42 @@ export type GetProjectDataQueryResult = {
     _type: 'image'
   } | null
   urls: Array<{
-    text?: string
-    url?: string
-    icon?: IconPicker
+    text: string
+    url: string
+    icon: IconPicker
     _key: string
   }> | null
-  og_image: {
-    asset?: {
-      _ref: string
-      _type: 'reference'
-      _weak?: boolean
-      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+  seo: {
+    _type: 'seo'
+    title?: string
+    description?: string
+    og_image?: {
+      asset?: {
+        _ref: string
+        _type: 'reference'
+        _weak?: boolean
+        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+      }
+      hotspot?: SanityImageHotspot
+      crop?: SanityImageCrop
+      _type: 'image'
     }
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    _type: 'image'
   } | null
   tags: Array<{
     _id: string
-    name: string | null
-    slug: Slug | null
+    name: string
+    slug: Slug
   }> | null
 } | null
 // Variable: getTagsQuery
-// Query: *[_type=='tag'] | order(_updatedAt desc)[0..9] {  slug,  name,}
+// Query:   *[_type=='tag']  | order(_updatedAt desc)  {    slug,    name,  }
 export type GetTagsQueryResult = Array<{
-  slug: Slug | null
-  name: string | null
+  slug: Slug
+  name: string
 }>
 // Variable: getTagDataQuery
-// Query: *[_type=='tag' && slug.current == $slug][0] {  name,  slug}
+// Query:   *[_type=='tag'  && slug.current == $slug]  [0]  {    name,    slug  }
 export type GetTagDataQueryResult = {
-  name: string | null
-  slug: Slug | null
+  name: string
+  slug: Slug
 } | null
