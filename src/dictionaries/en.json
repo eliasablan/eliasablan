@@ -1,0 +1,19 @@
+{
+  "blog": {
+    "title": "Blog",
+    "noPosts": "No posts right now"
+  },
+  "projects": {
+    "title": "Projects",
+    "noProjects": "No projects right now"
+  },
+  "tags": {
+    "title": "Tags",
+    "noTags": "No tags right now"
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  }
+}

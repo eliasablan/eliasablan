@@ -4,6 +4,7 @@ import * as React from 'react'
 import { Moon, Sun, Settings } from 'lucide-react'
 import { useTheme } from 'next-themes'
 
+import { useDictionary } from './dictionary-provider'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -32,6 +33,7 @@ export function ModeToggle({
   className,
 }: ModeToggleProps) {
   const { setTheme } = useTheme()
+  const dictionary = useDictionary()
 
   return (
     <DropdownMenu>
@@ -52,21 +54,21 @@ export function ModeToggle({
           onClick={() => setTheme('light')}
         >
           <Sun className="delay-250 h-4 w-4 transition-all duration-500 ease-in-out group-hover:rotate-180" />
-          Light
+          {dictionary.theme.light}
         </DropdownMenuItem>
         <DropdownMenuItem
           className="group flex justify-start gap-4 px-6 py-8 md:px-4 md:py-6"
           onClick={() => setTheme('dark')}
         >
           <Moon className="delay-250 h-4 w-4 transition-all duration-500 ease-in-out group-hover:rotate-180" />
-          Dark
+          {dictionary.theme.dark}
         </DropdownMenuItem>
         <DropdownMenuItem
           className="group flex justify-start gap-4 px-6 py-8 md:px-4 md:py-6"
           onClick={() => setTheme('system')}
         >
           <Settings className="delay-250 h-4 w-4 transition-all duration-500 ease-out group-hover:rotate-90" />
-          System
+          {dictionary.theme.system}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

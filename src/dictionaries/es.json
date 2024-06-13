@@ -1,0 +1,19 @@
+{
+  "blog": {
+    "title": "Blog",
+    "noPosts": "No hay posts ahora"
+  },
+  "projects": {
+    "title": "Proyectos",
+    "noProjects": "No hay proyectos ahora"
+  },
+  "tags": {
+    "title": "Etiquetas",
+    "noTags": "No hay etiquetas ahora"
+  },
+  "theme": {
+    "light": "Claro",
+    "dark": "Oscuro",
+    "system": "Sistema"
+  }
+}

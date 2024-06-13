@@ -3,14 +3,16 @@ import Link from 'next/link'
 import { badgeVariants } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
 import { Locale } from '../lib/i18n-config'
+import { getDictionary } from '@/lib/dictionary'
 
 const Tags = async ({ lang }: { lang: Locale }) => {
   const tags = await getTags()
+  const dictionary = await getDictionary(lang)
 
   return (
     <div className="py-8 md:pt-12">
       <div className="flex items-center pb-3 text-xl font-medium">
-        <h2 className="inline align-middle">Tags</h2>
+        <h2 className="inline align-middle">{dictionary.tags.title}</h2>
       </div>
       <div className="w-full text-sm">
         {tags && tags.length > 0 ? (
@@ -29,7 +31,7 @@ const Tags = async ({ lang }: { lang: Locale }) => {
             ))}
           </div>
         ) : (
-          <h1>No posts right now</h1>
+          <h1>{dictionary.tags.noTags}</h1>
         )}
       </div>
     </div>

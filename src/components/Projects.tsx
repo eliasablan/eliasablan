@@ -1,3 +1,4 @@
+import { getDictionary } from '@/lib/dictionary'
 import { Locale } from '../lib/i18n-config'
 import ProjectSquare from './ProjectSquare'
 import { getProjects } from '@/lib/sanity/queries'
@@ -9,10 +10,11 @@ interface ProjectsProps {
 
 const Projects = async ({ tag, lang }: ProjectsProps) => {
   const projects = await getProjects({ tag, lang })
+  const dictionary = await getDictionary(lang)
 
   return (
     <div className="py-8 md:pt-12">
-      <h2 className="text-xl font-medium">Projects</h2>
+      <h2 className="text-xl font-medium">{dictionary.projects.title}</h2>
       <div className="mt-4 grid grid-cols-2 gap-4 md:grid-cols-3">
         {projects && projects.length > 0 ? (
           projects.map((project) => {
@@ -25,7 +27,7 @@ const Projects = async ({ tag, lang }: ProjectsProps) => {
             )
           })
         ) : (
-          <h1>No projects right now</h1>
+          <h1>{dictionary.projects.noProjects}</h1>
         )}
       </div>
     </div>
