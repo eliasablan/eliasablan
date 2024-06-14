@@ -18,7 +18,7 @@ const PostItem = ({ post, lang }: PostItemProps) => {
             <span>{post.title}</span>
           </h2>
           <div className="min-w-24 text-right font-normal opacity-40">
-            <DateJSX dateString={post._createdAt} />
+            <DateJSX dateString={post._createdAt} lang={lang} />
           </div>
         </article>
       </Link>

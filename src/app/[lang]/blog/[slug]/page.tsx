@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import { PortableText } from '@portabletext/react'
 import PortableTextComponents from '@/components/PortableTextComponents'
-import { DateJSX } from '@/components/Date'
+import { LongDateJSX } from '@/components/Date'
 import { getPostData, getPosts } from '@/lib/sanity/queries'
 import { urlFor } from '@/lib/sanity/utils'
 import { cn } from '@/lib/utils'
@@ -50,7 +50,7 @@ const blogPost = async ({ params }: PostProps) => {
       <article className="px-6 py-12">
         <div className="mx-auto mb-10 block max-w-sm text-center">
           <p className="text-sm text-muted-foreground">
-            <DateJSX dateString={post?._createdAt || ''} />
+            <LongDateJSX dateString={post?._createdAt || ''} lang={lang} />
           </p>
           <h1 className="text-3xl font-extrabold">{post?.title}</h1>
         </div>
