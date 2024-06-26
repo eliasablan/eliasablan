@@ -72,7 +72,7 @@ const ProjectSquare = ({ lang, project }: ProjectSquareProps) => {
             </div>
             <div className="pb-1">
               <div className="mt-1 flex items-center gap-[6px]">
-                <h3 className="line-clamp-1 text-base font-medium">
+                <h3 className="line-clamp-1 text-lg font-semibold">
                   {project.name}
                 </h3>
               </div>
@@ -83,16 +83,20 @@ const ProjectSquare = ({ lang, project }: ProjectSquareProps) => {
           </Card>
         </Link>
       </HoverCardTrigger>
-      <HoverCardContent>
-        <h3 className="mb-2 text-base font-medium">{project.name}</h3>
-        <div className="mb-2">
+      <HoverCardContent className="bg-secondary text-secondary-foreground">
+        <h3 className="mb-2 text-center text-lg font-semibold">
+          {project.name}
+        </h3>
+        <p className="mb-4 text-balance text-center text-sm">
+          {project.short_description}
+        </p>
+        <div className="text-balance text-center">
           {project.tags?.map((tag: any) => (
-            <Badge key={tag._id} variant="secondary" className="mr-0.5">
+            <Badge key={tag._id} className="mr-1 mt-1">
               {tag.name}
             </Badge>
           ))}
         </div>
-        <p className="text-sm">{project.short_description}</p>
       </HoverCardContent>
     </HoverCard>
   )
