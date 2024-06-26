@@ -23,7 +23,7 @@ interface ProjectSquareProps {
 
 const ProjectSquare = ({ lang, project }: ProjectSquareProps) => {
   return (
-    <HoverCard>
+    <HoverCard defaultOpen={true}>
       <HoverCardTrigger asChild>
         <Link href={`/${lang}/projects/${project.slug}`}>
           <Card
@@ -92,7 +92,7 @@ const ProjectSquare = ({ lang, project }: ProjectSquareProps) => {
         </p>
         <div className="text-balance text-center">
           {project.tags?.map((tag: any) => (
-            <Badge key={tag._id} className="mr-1 mt-1">
+            <Badge key={tag._id} className="m-1">
               {tag.name}
             </Badge>
           ))}
