@@ -90,9 +90,9 @@ const ProjectSquare = ({ lang, project }: ProjectSquareProps) => {
         <p className="mb-4 text-balance text-center text-sm">
           {project.short_description}
         </p>
-        <div className="text-balance text-center">
+        <div className="mb-1 text-balance text-center">
           {project.tags?.map((tag: any) => (
-            <Badge key={tag._id} className="m-1">
+            <Badge key={tag._id} className="m-0.5">
               {tag.name}
             </Badge>
           ))}
