@@ -71,7 +71,7 @@ const blogPost = async ({ params }: PostProps) => {
                       'border-2 hover:border-2 hover:border-dashed hover:border-primary'
                     )}
                   >
-                    #{tag?.slug?.current}
+                    {tag?.slug?.current}
                   </Link>
                 )
               })}

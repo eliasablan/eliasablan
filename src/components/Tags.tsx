@@ -26,7 +26,7 @@ const Tags = async ({ lang }: { lang: Locale }) => {
                   'border-2 hover:border-2 hover:border-dashed hover:border-primary'
                 )}
               >
-                #{tag.name}
+                {tag.name}
               </Link>
             ))}
           </div>

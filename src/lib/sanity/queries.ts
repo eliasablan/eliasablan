@@ -54,7 +54,7 @@ export async function getHome(lang: Locale): Promise<GetHomeQueryResult> {
   return sanityFetch({
     query: getHomeQuery,
     params: { lang },
-    tags: [`${lang}:home`],
+    tags: ['home'],
   })
 }
 
@@ -64,7 +64,7 @@ export async function getSettings(
   return sanityFetch({
     query: getSettingsQuery,
     params: { lang },
-    tags: [`${lang}:settings`],
+    tags: ['settings'],
   })
 }
 // #endregion
@@ -80,7 +80,7 @@ export async function getProjects({
   return sanityFetch({
     query: tag ? getProjectsByTagQuery : getProjectsQuery,
     params: { tag, lang },
-    tags: [`${lang}:project`],
+    tags: ['project'],
   })
 }
 
@@ -106,7 +106,7 @@ export async function getPosts({
   return sanityFetch({
     query: tag ? getPostsByTagQuery : getPostsQuery,
     params: { tag, lang },
-    tags: [`${lang}:post`],
+    tags: ['post'],
   })
 }
 

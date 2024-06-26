@@ -57,10 +57,10 @@ const PortableTextComponents: Partial<PortableTextReactComponents> = {
   },
   listItem: {
     bullet: ({ children }: { children?: React.ReactNode }) => (
-      <li className="leading-8">{children}</li>
+      <li className="leading-6">{children}</li>
     ),
     checkmarks: ({ children }: { children?: React.ReactNode }) => (
-      <li className="leading-8">✅{children}</li>
+      <li className="leading-6">✅{children}</li>
     ),
   },
   marks: {
@@ -142,10 +142,10 @@ export const HomePortableTextComponents: Partial<PortableTextReactComponents> =
     },
     listItem: {
       bullet: ({ children }: { children?: React.ReactNode }) => (
-        <li className="leading-8">{children}</li>
+        <li className="leading-6">{children}</li>
       ),
       checkmarks: ({ children }: { children?: React.ReactNode }) => (
-        <li className="leading-8">✅{children}</li>
+        <li className="leading-6">✅{children}</li>
       ),
     },
     marks: {
