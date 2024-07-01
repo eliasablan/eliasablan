@@ -23,7 +23,7 @@ interface ProjectSquareProps {
 
 const ProjectSquare = ({ lang, project }: ProjectSquareProps) => {
   return (
-    <HoverCard defaultOpen={true}>
+    <HoverCard>
       <HoverCardTrigger asChild>
         <Link href={`/${lang}/projects/${project.slug}`}>
           <Card
