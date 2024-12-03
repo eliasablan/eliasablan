@@ -16,6 +16,43 @@ const PortableTextComponents: Partial<PortableTextReactComponents> = {
         height={getImageDimensions(value).height}
       />
     ),
+    youtube: ({
+      value,
+    }: {
+      value: { url: string; title?: string; caption?: string }
+    }) => {
+      // Extract video ID from YouTube URL
+      const getYouTubeID = (url: string) => {
+        const regExp =
+          /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/
+        const match = url.match(regExp)
+        return match && match[2].length === 11 ? match[2] : null
+      }
+
+      const videoId = getYouTubeID(value.url)
+
+      if (!videoId) return null
+
+      return (
+        <div className="my-6">
+          <div className="relative aspect-video w-full">
+            <iframe
+              className="absolute left-0 top-0 h-full w-full"
+              src={`https://www.youtube.com/embed/${videoId}`}
+              title={value.title || 'YouTube Video'}
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+          {value.caption && (
+            <p className="mt-2 text-center text-sm text-gray-600">
+              {value.caption}
+            </p>
+          )}
+        </div>
+      )
+    },
   },
   block: {
     h1: ({ children }: { children?: React.ReactNode }) => (
