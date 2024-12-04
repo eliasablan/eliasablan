@@ -183,43 +183,6 @@ const Header = () => {
             <Link
               className="text-lg hover:text-destructive"
               target="_blank"
-              href="https://instagram.com/eliasablan"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="1em"
-                height="1em"
-                fill="currentColor"
-                viewBox="0 0 256 256"
-              >
-                <rect width="256" height="256" fill="none"></rect>
-                <circle
-                  cx="128"
-                  cy="128"
-                  r="40"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeMiterlimit="10"
-                  strokeWidth="16"
-                ></circle>
-                <rect
-                  x="36"
-                  y="36"
-                  width="184"
-                  height="184"
-                  rx="48"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="16"
-                ></rect>
-                <circle cx="180" cy="76" r="12"></circle>
-              </svg>
-            </Link>
-            <Link
-              className="text-lg hover:text-destructive"
-              target="_blank"
               href="https://linkedin.com/in/eliasablan"
             >
               <svg
