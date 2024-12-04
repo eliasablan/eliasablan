@@ -122,9 +122,13 @@ export async function getPostData(
 // #endregion
 
 // #region Tags
-export async function getTags(): Promise<GetTagsQueryResult> {
+export async function getTags(lang: Locale): Promise<GetTagsQueryResult> {
+  // Ensure lang is always a string
+  const safeLanguage = lang || 'en' // Default to 'en' if undefined
+
   return sanityFetch({
-    query: getTagsQuery,
+    query: getTagsQuery, // This is already defined in your groqQueries.ts with language filter
+    params: { lang: safeLanguage },
     tags: ['tag'],
   })
 }

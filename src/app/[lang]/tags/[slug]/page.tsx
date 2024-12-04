@@ -25,8 +25,8 @@ interface TagProps {
   }
 }
 
-export async function generateStaticParams() {
-  const tags = await getTags()
+export async function generateStaticParams({ params }: TagProps) {
+  const tags = await getTags(params.lang)
 
   return tags.map((tag) => ({
     slug: tag?.slug?.current,

@@ -6,7 +6,7 @@ import { Locale } from '../lib/i18n-config'
 import { getDictionary } from '@/lib/dictionary'
 
 const Tags = async ({ lang }: { lang: Locale }) => {
-  const tags = await getTags()
+  const tags = await getTags(lang)
   const dictionary = await getDictionary(lang)
 
   return (

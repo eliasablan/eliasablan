@@ -124,13 +124,14 @@ export const getProjectDataQuery = groq`*[_type=='project' && slug.current == $s
 // #endregion
 
 // #region Tags
-export const getTagsQuery = groq`
-  *[_type=='tag']
-  | order(_updatedAt desc)
-  {
-    slug,
-    name,
-  }`
+export const getTagsQuery = groq`*[_type == "tag" && (
+  count(*[_type == "project" && references(^._id) && language == $lang]) > 0 ||
+  count(*[_type == "post" && references(^._id) && language == $lang]) > 0
+)] {
+  ...,
+  "projectCount": count(*[_type == "project" && references(^._id) && language == $lang]),
+  "postCount": count(*[_type == "post" && references(^._id) && language == $lang])
+}`
 
 export const getTagDataQuery = groq`
   *[_type=='tag'
