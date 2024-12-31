@@ -66,7 +66,7 @@ const Header = () => {
             <Link
               href={`/${lang ? lang : pathname.slice(1, 3)}`}
               className={cn(
-                'h-auto rounded-xl px-3 py-1.5 capitalize transition-all duration-150 ease-in-out hover:bg-secondary',
+                'h-auto rounded-lg px-3 py-1.5 capitalize transition-all duration-150 ease-in-out hover:bg-secondary',
                 (pathname.slice(-3) === '/en' ||
                   pathname.slice(-3) === '/es') &&
                   'bg-secondary'
@@ -95,7 +95,7 @@ const Header = () => {
                 key={link._key}
                 href={`/${lang ? lang : pathname.slice(1, 3)}/${link.url!}`}
                 className={cn(
-                  'flex w-full items-center rounded-xl px-[8px] py-[6px] capitalize transition-all duration-150 ease-in-out hover:bg-secondary md:py-[3px]',
+                  'flex w-full items-center rounded-lg px-[8px] py-[6px] capitalize transition-all duration-150 ease-in-out hover:bg-secondary md:py-[3px]',
                   pathname.slice(4) === link.url && 'bg-secondary'
                 )}
               >
@@ -239,58 +239,24 @@ const Header = () => {
               </svg>
             </Link>
             <Link
-              className="text-lg hover:text-destructive"
+              className="translate-y-[1px] text-lg hover:text-destructive"
               target="_blank"
               href="https://github.com/eliasablan"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="1em"
-                height="1em"
-                fill="currentColor"
-                viewBox="0 0 256 256"
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                className="lucide lucide-github"
               >
-                <rect width="256" height="256" fill="none"></rect>
-                <path
-                  d="M84,240a23.9,23.9,0,0,0,24-24V168"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="16"
-                ></path>
-                <path
-                  d="M172,240a23.9,23.9,0,0,1-24-24V168"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="16"
-                ></path>
-                <path
-                  d="M152,168h16a23.9,23.9,0,0,1,24,24v8a23.9,23.9,0,0,0,24,24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="16"
-                ></path>
-                <path
-                  d="M104,168H88a23.9,23.9,0,0,0-24,24v8a23.9,23.9,0,0,1-24,24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="16"
-                ></path>
-                <path
-                  d="M111.8,64A52,52,0,0,0,68,40a52,52,0,0,0-3.5,44.7A49.3,49.3,0,0,0,56,112v8a48,48,0,0,0,48,48h48a48,48,0,0,0,48-48v-8a49.3,49.3,0,0,0-8.5-27.3A52,52,0,0,0,188,40a52,52,0,0,0-43.8,24Z"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="16"
-                ></path>
+                <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+                <path d="M9 18c-4.51 2-5-2-7-2" />
               </svg>
             </Link>
           </div>
