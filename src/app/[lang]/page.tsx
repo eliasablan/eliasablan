@@ -7,7 +7,7 @@ import type { Metadata } from 'next'
 
 import { getHome } from '@/lib/sanity/queries'
 import { urlFor } from '@/lib/sanity/utils'
-import { Locale, i18n } from '../../lib/i18n-config'
+import { Locale, i18n } from '@/lib/i18n-config'
 
 interface PageProps {
   params: { lang: Locale }
